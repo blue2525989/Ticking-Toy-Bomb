@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments::head"></head>
+    <body>
+	
+	<nav th:replace="fragments::nav"></nav>
+	<!-- jumbotron-->
+    <div th:replace="fragments::jumbotron">
+    </div>
+    
+
+	<div class="container">
+	
+	<!-- change this to a model and pass as a list -->
+	<!-- first feature -->
+	
+	 <hr class="featurette-divider"/>
+	 <div  th:if="${items != null}">
+		<!-- add as a model and not session -->
+      <div class="row featurette" th:each="item : ${items}">
+        <div class="col-md-7">
+          <h2 class="featurette-heading" th:text="${item.headline}">
+          What your companies best at.</h2>
+          <p class="lead" th:utext="${item.content}">
+          	Here is a paragraph where you can describe something very interested. Talk about 
+          	what you have to offer the customer. Draw them in and generate some revenue!
+          </p>
+        </div>
+        <div class="col-md-5">
+
+        <!-- add the image from bucket -->
+        <img th:attr="src=${item.url},title=${item.headline},alt=${item.headline}" /><br/>
+           </div>
+      </div>     
+      	</div>
+        <div th:if="${items == null}">
+			<p>You have no items saved.</p><br/>
+		</div> 
+		
+	 <hr class="featurette-divider"/>
+
+
+</div>
+       <!-- start of footer -->
+ 	<footer th:replace="fragments :: footer"></footer>
+	
+
+    </body>
+</html>
