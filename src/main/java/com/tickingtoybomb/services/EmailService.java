@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +25,10 @@ public class EmailService {
 
     // Replace with a "To" address. If your account is still in the
     // sandbox, this address must be verified.
-    static final String TO = "verified email";
+    static final String TO = "";
+    
+    @Autowired
+    public BasicAWSCredentials creds;
     
     @SuppressWarnings("deprecation")
 	@RequestMapping("/sendEmail")
@@ -61,11 +65,7 @@ public class EmailService {
  		
  		// Set AWS access credentials.
  		AmazonSimpleEmailServiceClient client =
- 		       new AmazonSimpleEmailServiceClient(
- 		               new BasicAWSCredentials(
- 		            		   "access key",
- 		            		   "secret key")).withRegion(
- 		            				  Regions.US_WEST_2);
+ 		       new AmazonSimpleEmailServiceClient(creds).withRegion(Regions.US_WEST_2);
  		
  		// Call Amazon SES to send the message. 
  		try {

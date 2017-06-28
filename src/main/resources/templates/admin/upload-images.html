@@ -19,8 +19,6 @@
 					Edit Home page</button></a></li>
 				<li><a href="/edit-inventory"><button type="button" class="btn btn-success">
 					Edit Inventory page</button></a></li>
-				<li><a href="/edit-services"><button type="button" class="btn btn-success">
-					Edit Services page</button></a></li>
 				<li><a href="/edit-about"><button type="button" class="btn btn-success">
 					Edit About us page</button></a></li>
 				<li><a href="/edit-contact"><button type="button" class="btn btn-success">
@@ -29,6 +27,8 @@
 					Edit Gallery page</button></a></li>
 				<li><a href="/upload-page"><button type="button" class="btn btn-success">
 					Upload Images</button></a></li>
+				<li><a href="/edit-paypal-button"><button type="button" class="btn btn-success">
+					Add new PalPay Button</button></a></li>
 				</ul>
 				<hr/>
 			</nav>
@@ -40,11 +40,13 @@
 			<!-- this uses angularJS to have text box that
 			user can type and update in real time -->
 					 	
-				<select id="type" name="type">
-					<option value="jumbo">Jumbo</option>
-			 		<option value="card">Card</option>
-			 		<option value="feature">Feature</option>
-			 	</select>
+		        <select name="type">
+		            <option value="necklace">Necklace</option>
+		            <option value="earring">Earrings</option>
+		            <option value="bracelet">Bracelet</option>
+		            <option value="accessory">Accessory</option>
+		            <option value="other">Other</option>
+		        </select>
 			 	
 			 	<input name="file" type="file" id="file-chooser" /><br/>
 			 	<br/>
@@ -69,11 +71,13 @@
 		<!-- list all for figuring out ID -->				
 			<h2>List all</h2>
 			<form action="/list-images" method="GET">
-				<select id="type" name="type">
-					<option value="jumbo">Jumbo</option>
-			 		<option value="card">Card</option>
-			 		<option value="feature">Feature</option>
-			 	</select>
+		        <select name="type">
+		            <option value="necklace">Necklace</option>
+		            <option value="earring">Earrings</option>
+		            <option value="bracelet">Bracelet</option>
+		            <option value="accessory">Accessory</option>
+		            <option value="other">Other</option>
+		        </select>
 			 	<br/>
 				<button type="submit" id="button">List all</button><br />
 			</form>

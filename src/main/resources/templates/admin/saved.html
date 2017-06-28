@@ -5,19 +5,10 @@
     <body>
 	
 	<nav th:replace="fragments::nav"></nav>
-	
-    <!-- jumbotron-->
-    <div th:replace="fragments::jumbotron">
-    </div>
-    
-
-	<div class="container">
-	
-	<!-- adding date from script -->
-	<div align="center"  th:if="${session.adminrole == true}"><span id="date"></span></div><br/><br/>
 		
+	<div class="container">
 	 <!-- administration menu, hard coded so wont confuse fragments.html-->
-		    <nav id="admin"  th:if="${session.adminrole == true}" >
+		    <nav id="admin" th:if="${session.adminrole == true}">
 				<hr/>
 				<ul>
 							
@@ -27,8 +18,6 @@
 					Edit Home page</button></a></li>
 				<li><a href="/edit-inventory"><button type="button" class="btn btn-success">
 					Edit Inventory page</button></a></li>
-				<li><a href="/edit-services"><button type="button" class="btn btn-success">
-					Edit Services page</button></a></li>
 				<li><a href="/edit-about"><button type="button" class="btn btn-success">
 					Edit About us page</button></a></li>
 				<li><a href="/edit-contact"><button type="button" class="btn btn-success">
@@ -37,6 +26,8 @@
 					Edit Gallery page</button></a></li>
 				<li><a href="/upload-page"><button type="button" class="btn btn-success">
 					Upload Images</button></a></li>
+				<li><a href="/edit-paypal-button"><button type="button" class="btn btn-success">
+					Add new PalPay Button</button></a></li>
 				</ul>
 				<hr/>
 			</nav>
@@ -45,9 +36,14 @@
 			<!-- this is where saved session shows up -->
 			<article>
 			<hr/>
-			<div align="center">
+			<div align="center" th:if="${session.saved != null and session.adminrole == true}">
 			<h1 th:inline="text">[[${session.saved}]]</h1>
 			</div>
+			
+			<div align="center" th:if="${session.saved == null}">
+			<h1 th:inline="text">Thanks for checking out Ticking Toy Bomb, Click a link to navigate around!</h1>
+			</div>
+			
 			<hr/>
 			</article>
 	

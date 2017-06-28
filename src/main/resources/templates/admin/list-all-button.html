@@ -41,21 +41,15 @@
 							<label>ID:</label>
 							<span th:if="${update.id}" th:text="${update.id}">ID: </span> <br/>
 							<span th:if="${update.id eq null}">No ID available</span> <br/>	
-							
-							<label>Type:</label>
-							<span th:if="${update.type}" th:text="${update.type}">Type: </span> <br/>
-							<span th:if="${update.type eq null}">No type available</span> <br/>
-							
+	
 							<label>Headline:</label>
 							<span th:if="${update.name}" th:text="${update.name}">Name: </span> <br/>
 							<span th:if="${update.name eq null}">No name available</span> <br/>
 							
 							<label>Content:</label>
-							<span th:if="${update.url}" th:text="${update.url}">URL: </span> <br/>
+							<span th:if="${update.url}" th:utext="${update.url}">URL: </span> <br/>
 							<span th:if="${update.url eq null}">No URL available</span> <br/>
-							
-							<img th:attr="src=${update.url},title=${update.url},alt=${update.name}"/><br/>
-						</dt>
+					</dt>
 						</dl>
 					</div>
 					

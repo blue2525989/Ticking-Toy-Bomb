@@ -7,7 +7,7 @@
 	<nav th:replace="fragments::nav"></nav>
 		
 	<div class="container">
-	<h1>Edit Contact Page</h1>
+	<h1>Edit PayPal Buttons</h1>
 	 <!-- administration menu, hard coded so wont confuse fragments.html-->
 		    <nav id="admin">
 				<hr/>
@@ -32,43 +32,40 @@
 				</ul>
 				<hr/>
 			</nav>
-	
 					<hr/>
 		
-		<!-- form for editing headline and content-->
-		<form action="/edit-contact/edit-contact-content" method="post">        
-       		<div class="form-group">
-			  <label class="col-3 col-form-label">Enter a Headline.</label>
+
+        <form action="/create-paypal-button" method="POST">        
+	
+			<!-- this uses angularJS to have text box that
+			user can type and update in real time -->
+				
+        	<div class="form-group">
+			  <label class="col-3 col-form-label">Enter a descriptive button name.</label>
 			  <br/>
 			  <div class="col-6">
-			    <input class="form-control" type="text" placeholder="Catchy Headline" name="headline"
-			     required="required" data-error="Headline is required." />
+			    <input class="form-control" type="text" placeholder="Button name" name="name"
+			     required="required" data-error="Name is required." />
 			     <div class="help-block with-errors"></div>
 			  </div>
 			</div>
 			
 			<div class="form-group">
-			    <label class="col-3">Enter a paragraph to get the client attention.</label>
-			    <br/>
+			    <label class="col-3">Enter HTML code from PayPal website.<br/><br/>
+			    <strong>MAKE SURE TO CLOSE ALL TAGS WITH /> PAYPAL DOES NOT DO THIS FOR YOU!</strong></label>
+			    <br/><br/>
 			    <textarea class="form-control col-6" name="content" rows="4"
 			    required="required" data-error="Content is required." ></textarea>
 			    <div class="help-block with-errors"></div>
 			  </div>
-			  
-			  <!-- add image from bucket-->
-		        <select name="url">
-		            <option th:each="image : ${session.imageList}"
-		                    th:text="${image.name}"
-		                    th:value="${image.url}"></option>
-		        </select>
-			 	
-             <button type="submit" class="btn btn-success">Edit Paragraph</button> 
-        </form> 
+			 	<br/>
+			    <button type="submit">Add PayPal Button</button>
+		</form>
         
         <br/><br/>
         <!-- delete based on ID -->
         	<h2>Delete entry based on ID number</h2>
-			<form action="/delete-contact" method="GET">
+			<form action="/delete-paypal-button" method="GET">
 				<label for="ID">ID:</label><br />
 				<input type="text" name="ID" size="50" class="ID"  
 				required="required" data-error="ID is required." />
@@ -82,11 +79,13 @@
 
 		<!-- list all for figuring out ID -->				
 			<h2>List all</h2>
-			<form action="/list-contact" method="GET">
+			<form action="/list-paypal-buttons" method="GET">
 				<button type="submit" id="button">List all</button><br />
 			</form>
 				
-		<br/><br/><hr/>	
+				
+		<br/><br/><hr/>
+			
 	
 	<!-- end container -->
 	</div>

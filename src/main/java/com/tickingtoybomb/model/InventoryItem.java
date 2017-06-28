@@ -30,7 +30,11 @@ public class InventoryItem {
 	private String url;
 	
 	@NotNull
-	private Double price;
+	private String price;
+	
+	@NotNull
+	@Lob
+	private String button;
 	
 	
 	public Long getId() {
@@ -81,11 +85,19 @@ public class InventoryItem {
 		this.url = url;
 	}
 
-	public Double getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(String price) {
 		this.price = price;
+	}
+
+	public String getButton() {
+		return button;
+	}
+
+	public void setButton(String button) {
+		this.button = button;
 	}
 }

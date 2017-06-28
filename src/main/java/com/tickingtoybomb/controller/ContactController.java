@@ -1,5 +1,7 @@
 package com.tickingtoybomb.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +47,8 @@ public class ContactController extends PermissionController {
 	public void findLastContactFeature(HttpSession session) {
 		long size = feature.count();
 		if (size > 0) {
-			session.setAttribute("contactMain", feature.getOne(size));
+			List<ContactFeatureContent> contact = feature.findAll();
+			session.setAttribute("contactMain", contact.get(contact.size()-1));
 		} else {
 			ContactFeatureContent feature = new ContactFeatureContent();
 			feature.setHeadline("Blue's website and software design");

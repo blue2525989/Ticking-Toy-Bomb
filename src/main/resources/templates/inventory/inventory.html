@@ -15,25 +15,46 @@
 	<!-- change this to a model and pass as a list -->
 	<!-- first feature -->
 	
-	 <hr class="featurette-divider"/>
-	 <div  th:if="${items != null}">
-		<!-- add as a model and not session -->
-      <div class="row featurette" th:each="item : ${items}">
-        <div class="col-md-7">
-          <h2 class="featurette-heading" th:text="${item.headline}">
-          What your companies best at.</h2>
-          <p class="lead" th:utext="${item.content}">
-          	Here is a paragraph where you can describe something very interested. Talk about 
-          	what you have to offer the customer. Draw them in and generate some revenue!
-          </p>
-        </div>
-        <div class="col-md-5">
+	
+	<div th:unless="${#lists.isEmpty(items)}">
+	<div th:each="item : ${items}">
 
+						<!-- add as a model and not session -->
+     <div class="row featurette">
+        <div class="col-md-7">
+         	 <h2 class="featurette-heading" th:text="${item.headline}">
+         	 What your companies best at.</h2>
+         	 <p class="lead" th:utext="${item.content}">
+         	 </p>
+         	<strong>Price: <span th:text="${item.price}"></span></strong>
+         	<br/>
+         	<br/>
+         	<h3>Order your item today!</h3><br/>
+         <div class="col-md-3">
+         	<label>Secure Payment with PayPal.</label><br/>
+         	<span th:utext="${item.button}"></span>
+         </div>
+        </div>
+        
+		
+        <div class="col-md-5">
         <!-- add the image from bucket -->
         <img th:attr="src=${item.url},title=${item.headline},alt=${item.headline}" /><br/>
-           </div>
-      </div>     
+         </div>
+         
       	</div>
+      	<br/><br/><hr/><br/>
+		</div>
+		</div>
+					
+					<div th:if="${#lists.isEmpty(items)}">	
+						<p>You have no items in your inventory.</p>
+					</div>
+					
+
+	 
+
+      	
         <div th:if="${items == null}">
 			<p>You have no items saved.</p><br/>
 		</div> 

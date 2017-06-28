@@ -21,7 +21,7 @@
 
       <div class="row featurette">
         <div class="col-md-7" th:unless="${session.aboutMain == null}">
-          <h2 class="featurette-heading" th:text="${session.aboutMain.headline}">
+          <h2 class="featurette-heading" th:utext="${session.aboutMain.headline}">
           What your companies best at.</h2>
           <p class="lead" th:utext="${session.aboutMain.content}">
           	Here is a paragraph where you can describe something very interested. Talk about 

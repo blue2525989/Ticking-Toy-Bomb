@@ -1,5 +1,7 @@
 package com.tickingtoybomb.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +34,10 @@ public class AboutController extends PermissionController {
 		// try just counting instead of returning full list to speed up times
 		long size = about.count();
 		if (size > 0) {
-			AboutContent aboutCon = about.getOne(size);
-			if (aboutCon != null) {
-				session.setAttribute("aboutMain", aboutCon);
+			List<AboutContent> aboutCon = about.findAll();
+			AboutContent last = aboutCon.get(aboutCon.size()-1);
+			if (last != null) {
+				session.setAttribute("aboutMain", last);
 			}
 		} else {
 			AboutContent aboutCon = new AboutContent();

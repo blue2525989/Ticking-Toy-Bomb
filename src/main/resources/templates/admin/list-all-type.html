@@ -7,9 +7,8 @@
 	<nav th:replace="fragments::nav"></nav>
 		
 	<div class="container">
-	
 	 <!-- administration menu, hard coded so wont confuse fragments.html-->
-		    <nav id="admin">
+		    <nav id="admin" th:if="${session.adminrole == true}">
 				<hr/>
 				<ul>
 							
@@ -19,8 +18,6 @@
 					Edit Home page</button></a></li>
 				<li><a href="/edit-inventory"><button type="button" class="btn btn-success">
 					Edit Inventory page</button></a></li>
-				<li><a href="/edit-services"><button type="button" class="btn btn-success">
-					Edit Services page</button></a></li>
 				<li><a href="/edit-about"><button type="button" class="btn btn-success">
 					Edit About us page</button></a></li>
 				<li><a href="/edit-contact"><button type="button" class="btn btn-success">
@@ -29,6 +26,8 @@
 					Edit Gallery page</button></a></li>
 				<li><a href="/upload-page"><button type="button" class="btn btn-success">
 					Upload Images</button></a></li>
+				<li><a href="/edit-paypal-button"><button type="button" class="btn btn-success">
+					Add new PalPay Button</button></a></li>
 				</ul>
 				<hr/>
 			</nav>
@@ -56,6 +55,10 @@
 							<span th:if="${update.content}" th:text="${update.content}">Content: </span> <br/>
 							<span th:if="${update.content eq null}">No content available</span> <br/>
 
+							<!-- add the image from bucket -->
+       						<img th:attr="src=${update.url},title=${update.headline},alt=${update.headline}" /><br/>
+           
+           
 						</dt>
 						</dl>
 					</div>

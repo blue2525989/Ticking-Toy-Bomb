@@ -2,14 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
 	<!-- title, auther meta tag, enable mobile view -->
-	<title>Ticking Toy Bomb up-cycled jewelry</title>
-	<meta name="author" content="Jason Bierbrauer"/>
+	<title>Ticking Toy Bomb upcycled jewelry</title>
+	<link rel="icon" type="image/png" href="https://s3-us-west-2.amazonaws.com/ticking-toy-bomb-images/system/blocks-icon.png" />
+	<meta name="author" content="Jason Bierbrauer"/>	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content="Ticking Toy Bomb up-cycled jewelry and accessories. We offer 
-    unique one of a kind up-cycled jewelry made from old toys."/>
-     <meta name="description" content="Ticking Toy Bomb up-cycled jewelry, lego jewelry, up-cycle jewelry,
-     lego resale, lego earring, lego necklace, lego bracelet"/>
-	<!-- angularJS -->
+     <!-- meta description and keywords -->
+    <meta name="description" content="Ticking Toy Bomb upcycled jewelry and accessories. We offer 
+    unique one of a kind upcycled jewelry made from old toys."/>
+     <meta name="keywords" content="Ticking Toy Bomb upcycled jewelry, lego jewelry, upcycle jewelry,
+     lego resale, lego earring, lego necklace, lego bracelet, star wars jewelry, star wars necklace, 
+     star wars earrings"/>
+	<!-- content type -->
 	<meta http-equiv="Content-Type" context="text/html; charset=UTF-8" />	
 	<!-- bootstrapJS -->
 	<link rel="stylesheet" href="css/bootstrap.css" />
@@ -28,23 +32,26 @@
 			</header>
 			
 			<!-- nav bar layout version 2 -->
-				<nav  th:fragment="nav" class="navbar navbar-toggleable-lg navbar-inverse" style="background-color:  #292b2c;">
-				  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<nav  th:fragment="nav" class="navbar navbar-toggleable-md navbar-inverse" style="background-color:  #292b2c;">
+				  <button class="navbar-toggler navbar-toggler-center" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 				    <span class="navbar-toggler-icon"></span>
 				  </button>
-				  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+				  <div class="collapse navbar-collapse" id="navbarNavDropdown" style="background-color:  #292b2c;">
 				    <ul class="navbar-nav">
 		          <li class="nav-item active">
 		            <a class="nav-link" href="/">Home</a>
 		          </li>
 		          
-		          <li class="nav-item active">
-		            <a class="nav-link" href="/inventory">Inventory</a>
-		          </li>		    
-		                
-		          <li class="nav-item active">
-		            <a class="nav-link" href="/services">Services</a>
-		          </li>
+		                       
+		          <li class="nav-item dropdown active">
+				    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Items for Sale</a>
+				    <div class="dropdown-menu">
+		              <a class="dropdown-item" href="/inventory-necklace">Necklaces</a>
+		              <a class="dropdown-item" href="/inventory-earring">Earrings</a>
+		              <a class="dropdown-item" href="/inventory-accessories">Accessories</a>
+		              <a class="dropdown-item" href="/inventory-other">Odds and Ends</a>
+				    </div>
+				  </li>	    
 		          
 		          <li class="nav-item active">
 		            <a class="nav-link" href="/about">About us</a>
@@ -77,12 +84,8 @@
 		    <div th:fragment="jumbotron" class="jumbotron" th:style="'background:url(' + ${session.jumboMain.url} + ');
 		      max-width: auto; height: auto;  background-position: 0% 25%; background-size: cover; background-repeat: no-repeat;'">
 		      <div class="container" th:unless="${session.jumboMain == null}">
-		        <h1 class="display-3" th:text="${session.jumboMain.headline}">headline</h1>
-		        <p th:text="${session.jumboMain.content}">
-		        This is an opportunity to talk about some of the services that your company can offer to your clients
-		        Also if you have your own company banner already, that can be used instead of this generic one.
-		         The button below will take you to the page describing the services in depth.</p>
-		        <p><a class="btn btn-primary btn-lg" href="/services" role="button">Learn more &raquo;</a></p>
+		        <h1 class="display-3" th:utext="${session.jumboMain.headline}">headline</h1>
+		        <p th:utext="${session.jumboMain.content}">content</p>
 		      </div>
 		      
 		      <div class="jumbotron" th:if="${session.jumboMain == null}">
@@ -99,13 +102,11 @@
 				<!-- sample code for dropdown menu items -->
 			      <ul>              
 		          <li class="nav-item dropdown">
-				    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Projects</a>
+				    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Items for Sale</a>
 				    <div class="dropdown-menu">
-		              <a class="dropdown-item" href="/blueDB">Database Management</a>
-		              <a class="dropdown-item" href="/encrypter">Text Encryption</a>
-		              <a class="dropdown-item" href="/poker">Card Games</a>
-		              <a class="dropdown-item" th:if="${session.adminrole == true}"
-						 href="/adminpage">Admin Page</a>
+		              <a class="dropdown-item" href="/inventory-necklace">Necklaces</a>
+		              <a class="dropdown-item" href="/inventory-earring">Earrings</a>
+		              <a class="dropdown-item" href="/inventory-accessories">Accessories</a>
 				    </div>
 				  </li>
 				  
@@ -121,6 +122,46 @@
 				    </div>
 				  </li>
 		          </ul>
+		          
+		          <!-- unclosed tags example of PayPal button
+		          
+		        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="GND7XN7YTVCVG">
+					<table>
+					<tr><td><input type="hidden" name="on0" value="Colors">Colors</td></tr><tr><td><select name="os0">
+						<option value="Blue">Blue </option>
+						<option value="Green">Green </option>
+						<option value="Red">Red </option>
+						<option value="Yellow">Yellow </option>
+						<option value="Green Sparkle">Green Sparkle </option>
+					</select> </td></tr>
+					</table>
+					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+				</form>
+		          
+		           -->
+		          
+		          <!-- closed tags example of PayPal button
+		        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+					<input type="hidden" name="cmd" value="_s-xclick" />
+					<input type="hidden" name="hosted_button_id" value="GND7XN7YTVCVG" />
+					<table>
+					<tr><td><input type="hidden" name="on0" value="Colors" />Colors</td></tr><tr><td><select name="os0">
+						<option value="Blue">Blue </option>
+						<option value="Green">Green </option>
+						<option value="Red">Red </option>
+						<option value="Yellow">Yellow </option>
+						<option value="Green Sparkle">Green Sparkle </option>
+					</select> </td></tr>
+					</table>
+					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" />
+					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+				</form>
+		          
+		          -->
+		          
 		          
 		     <!-- start of footer -->
 			 <footer th:fragment="footer">

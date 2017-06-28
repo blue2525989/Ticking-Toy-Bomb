@@ -20,9 +20,9 @@
 
       <div class="row featurette">
         <div class="col-md-7" th:unless="${session.contactMain == null}">
-          <h2 class="featurette-heading" th:text="${session.contactMain.headline}">
+          <h2 class="featurette-heading" th:utext="${session.contactMain.headline}">
           What your companies best at.</h2>
-          <p class="lead" th:text="${session.contactMain.content}">
+          <p class="lead" th:utext="${session.contactMain.content}">
           	Here is a paragraph where you can describe something very interested. Talk about 
           	what you have to offer the customer. Draw them in and generate some revenue!
           </p>

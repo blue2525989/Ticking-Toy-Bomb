@@ -77,7 +77,7 @@ public class FileService extends PermissionController {
 		 */
 		try {
 
-		    s3client.putObject(new PutObjectRequest("bucket name",
+		    s3client.putObject(new PutObjectRequest("",
 		    		file.getOriginalFilename(), inputStream, metadata).withCannedAcl(CannedAccessControlList.PublicReadWrite));
 
 		} catch (AmazonServiceException ase) {
@@ -100,7 +100,7 @@ public class FileService extends PermissionController {
 		
 		Image img = new Image();
 		img.setName(file.getOriginalFilename());
-		img.setUrl("bucket url" + file.getOriginalFilename());
+		img.setUrl("" + file.getOriginalFilename());
 		img.setType(type);
 		imgRepo.save(img);
 		
@@ -138,7 +138,7 @@ public class FileService extends PermissionController {
 		// need to add aws code to delete from bucket
 		String file = imgRepo.findOne(ID).getName();
 		imgRepo.delete(ID);
-		s3client.deleteObject(new DeleteObjectRequest("bucket name", file));
+		s3client.deleteObject(new DeleteObjectRequest("", file));
 		String saved = "The Image with Name " + file + " has been deleted.";
 		session.setAttribute("saved", saved);
 		return "redirect:/saved";

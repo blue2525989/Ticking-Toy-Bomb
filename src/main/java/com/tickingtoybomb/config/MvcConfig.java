@@ -15,7 +15,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
-	private static final String URL = "localhost:3306/tickingtoybomb";
+	private static final String URL = "";
 	
 	// add view controllers for pages that deal with spring security
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -24,7 +24,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	
     @Bean
 	public BasicAWSCredentials basicAWSCredentials() {
-		return new BasicAWSCredentials("access key", "secret key");
+		return new BasicAWSCredentials("", "");
 	}
  
 	@SuppressWarnings("deprecation")

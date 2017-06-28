@@ -52,7 +52,7 @@ public class PermissionController {
 	
 	public JumbotronContent findLastJumbo() {
 		long size = jumbo.count();
-		if (size <= 0) {
+		if (size == 0) {
 			JumbotronContent jumbo = new JumbotronContent();
 			jumbo.setHeadline("Blue's website and software design");
 			String content = "Welcome to Blue's website and software design. This site is brand new "
@@ -63,7 +63,8 @@ public class PermissionController {
 			jumbo.setUrl("https://s3-us-west-2.amazonaws.com/wandering-wonderland-images/system/banner01.jpg");
 			return jumbo;
 		} else {
-			return jumbo.getOne(size);
+			List<JumbotronContent> jumboMain = jumbo.findAll();
+			return jumboMain.get(jumboMain.size()-1);
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package com.tickingtoybomb.controller.edit;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.tickingtoybomb.controller.PermissionController;
 import com.tickingtoybomb.model.Image;
 import com.tickingtoybomb.model.InventoryItem;
+import com.tickingtoybomb.model.PayPalButton;
 import com.tickingtoybomb.repository.ImageRepository;
 import com.tickingtoybomb.repository.InventoryRepository;
+import com.tickingtoybomb.repository.PayPalButtonRepository;
 
 @Controller
 public class EditInventoryController extends PermissionController {
@@ -25,12 +28,15 @@ public class EditInventoryController extends PermissionController {
 	// instance of Repositories
 	private InventoryRepository inventory;
 	private ImageRepository imgRepo;
+	private PayPalButtonRepository buttons;
 	
 	// autowire the repository to the controller
 	@Autowired
-	public EditInventoryController(InventoryRepository inventory, ImageRepository imgRepo) {
+	public EditInventoryController(InventoryRepository inventory, ImageRepository imgRepo,
+			PayPalButtonRepository buttons) {
 		this.inventory = inventory;
 		this.imgRepo = imgRepo;
+		this.buttons = buttons;
 	}
 	
 	@RequestMapping("/edit-inventory")
@@ -41,6 +47,10 @@ public class EditInventoryController extends PermissionController {
 		List<Image> imageList = imgRepo.findAll();
 		if (imageList != null) {
 			session.setAttribute("imageList", imageList);
+		}
+		List<PayPalButton> buttonList = buttons.findAll();
+		if (buttonList != null) {
+			session.setAttribute("buttonList", buttonList);
 		}
 		// admin user
 		if (hasAdminRole()) {
@@ -58,16 +68,15 @@ public class EditInventoryController extends PermissionController {
 	@PostMapping(path="/edit-inventory/edit-item")
 	// request params to save
 	public String addNewItem(Model model, @RequestParam String headline
-			, @RequestParam String content, @RequestParam String type, 
-			@RequestParam Double price,
-			@RequestParam String url) {
-
+			, @RequestParam String content, @RequestParam String url, @RequestParam String type, 
+			@RequestParam String price, @RequestParam String button) {
 		InventoryItem item = new InventoryItem();;
 		item.setHeadline(headline); 
 		item.setUrl(url);
 		item.setContent(content);
 		item.setType(type);
 		item.setPrice(price);
+		item.setButton(button);
 		inventory.save(item);
 		return "redirect:/edit-inventory";
 	}
@@ -89,7 +98,7 @@ public class EditInventoryController extends PermissionController {
 		List<InventoryItem> items = inventory.findAll();
 		// Iterator iter = jumboList.iterator();
 		if (items != null) {
-			model.addAttribute("items", items); /* all named list for uniformity */
+			model.addAttribute("listMain", items); /* all named list for uniformity */
 		}	
 		// admin user
 		if (hasAdminRole()) {

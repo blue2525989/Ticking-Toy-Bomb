@@ -4057,8 +4057,6 @@ tbody.collapse.show {
     display: -webkit-flex !important;
     display: -ms-flexbox !important;
     display: flex !important;
-    /* added this to counter act navbar dissapperaing */
-    height: 35px;
     width: 100%;
   }
   .navbar-toggleable .navbar-toggler {
@@ -4121,8 +4119,6 @@ tbody.collapse.show {
     display: -webkit-flex !important;
     display: -ms-flexbox !important;
     display: flex !important;
-    /* added this to counter act navbar dissapperaing */
-    height: 35px;
     width: 100%;
   }
   .navbar-toggleable-sm .navbar-toggler {
@@ -4249,8 +4245,6 @@ tbody.collapse.show {
     display: -webkit-flex !important;
     display: -ms-flexbox !important;
     display: flex !important;
-    /* added this to counter act navbar dissapperaing */
-    height: 35px;
     width: 100%;
   }
   .navbar-toggleable-lg .navbar-toggler {
@@ -4315,8 +4309,6 @@ tbody.collapse.show {
   display: -webkit-flex !important;
   display: -ms-flexbox !important;
   display: flex !important;
-    /* added this to counter act navbar dissapperaing */
-    height: 35px;
   width: 100%;
 }
 

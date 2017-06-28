@@ -1,12 +1,11 @@
 body {
-	background-color: #c3d6d7;
+	background-color: #55c4ff;
 	font-family: arial,helvetica,sans-serif;
 }
 
 div.jumbotron {
   max-width: auto;
   height: auto;
-  background-color: #000000;
   background-position: 0% 25%;
   background-size: cover;
   background-repeat: no-repeat;

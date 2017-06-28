@@ -86,40 +86,6 @@
           	<div th:if="${session.card6 == null}"><p>You have no card saved</p><br/></div>
           </div>
           
-
-          <div class="card">
-          	<div th:unless="${session.card7 == null}">
-        <!-- add the image from bucket -->
-        <img th:attr="src=${session.card7.url},title=${session.card7.url},alt=${session.card7.headline}" /><br/>
-            <h4 th:text="${session.card7.headline}">headline</h4>
-            <p class="card-text" th:utext="${session.card7.content}">
-            </p>
-          	</div>
-          	<div th:if="${session.card7 == null}"><p>You have no card saved</p><br/></div>
-          </div>
-          
-          <div class="card">
-          	<div th:unless="${session.card8 == null}">
-        <!-- add the image from bucket -->
-        <img th:attr="src=${session.card8.url},title=${session.card8.url},alt=${session.card8.headline}" /><br/>
-            <h4 th:text="${session.card8.headline}">headline</h4>
-            <p class="card-text" th:utext="${session.card8.content}">
-            </p>
-          	</div>
-          	<div th:if="${session.card8 == null}"><p>You have no card saved</p><br/></div>
-          </div>
-          
-          <div class="card">
-          	<div th:unless="${session.card9 == null}">
-        <!-- add the image from bucket -->
-        <img th:attr="src=${session.card9.url},title=${session.card9.url},alt=${session.card9.headline}" /><br/>
-            <h4 th:text="${session.card9.headline}">headline</h4>
-            <p class="card-text" th:utext="${session.card9.content}">
-            </p>
-          	</div>
-          	<div th:if="${session.card9 == null}"><p>You have no card saved</p><br/></div>
-          </div>
-          
         </div>
 
       </div>

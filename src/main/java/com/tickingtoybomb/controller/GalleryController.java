@@ -48,9 +48,6 @@ public class GalleryController extends PermissionController {
 		GalleryCardContent card4 = new GalleryCardContent();
 		GalleryCardContent card5 = new GalleryCardContent();
 		GalleryCardContent card6 = new GalleryCardContent();
-		GalleryCardContent card7 = new GalleryCardContent();
-		GalleryCardContent card8 = new GalleryCardContent();
-		GalleryCardContent card9 = new GalleryCardContent();
 		if (size > 0) {
 			List<GalleryCardContent> cards = card.findAll();
 			// reverse list to get newest ones first
@@ -73,15 +70,6 @@ public class GalleryController extends PermissionController {
 				} else if (cards.get(i).getType().equals("card6")) {
 					card6 = cards.get(i);
 					session.setAttribute("card6", card6);
-				} else if (cards.get(i).getType().equals("card7")) {
-					card7 = cards.get(i);
-					session.setAttribute("card7", card7);
-				} else if (cards.get(i).getType().equals("card8")) {
-					card8 = cards.get(i);
-					session.setAttribute("card8", card8);
-				} else if (cards.get(i).getType().equals("card9")) {
-					card9 = cards.get(i);
-					session.setAttribute("card9", card9);
 				}
 			}
 		} else {
@@ -107,24 +95,12 @@ public class GalleryController extends PermissionController {
 			card6.setHeadline("Blue's website and software design");
 			card6.setContent(content);
 			card6.setUrl("https://s3-us-west-2.amazonaws.com/blue-company-images/computer-02.jpg");
-			card7.setHeadline("Blue's website and software design");
-			card7.setContent(content);
-			card7.setUrl("https://s3-us-west-2.amazonaws.com/blue-company-images/computer-02.jpg");
-			card8.setHeadline("Blue's website and software design");
-			card8.setContent(content);
-			card8.setUrl("https://s3-us-west-2.amazonaws.com/blue-company-images/computer-02.jpg");
-			card9.setHeadline("Blue's website and software design");
-			card9.setContent(content);
-			card9.setUrl("https://s3-us-west-2.amazonaws.com/blue-company-images/computer-02.jpg");
 			session.setAttribute("card1", card1);
 			session.setAttribute("card2", card2);
 			session.setAttribute("card3", card3);
 			session.setAttribute("card4", card4);
 			session.setAttribute("card5", card5);
 			session.setAttribute("card6", card6);
-			session.setAttribute("card7", card7);
-			session.setAttribute("card8", card8);
-			session.setAttribute("card9", card9);
 		}
 	}
 }
