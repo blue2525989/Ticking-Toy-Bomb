@@ -56,8 +56,8 @@ public class EmailService {
  		Message msg = new Message().withSubject(subjContent);
  		
  		// Include a body in HTML formats.
- 		Content htmlContent = new Content().withData(phone +" "+ name +" "+ surname +" "+ email
- 				+"-------------------------------------"+ message);
+ 		Content htmlContent = new Content().withData(phone +"<br/>"+ name +"<br/>"+ surname +"<br/>"+ email
+ 				+"<br/><br/><br/>"+ message);
  		Body body = new Body().withHtml(htmlContent);
  		msg.setBody(body);
  		

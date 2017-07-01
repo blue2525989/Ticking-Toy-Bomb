@@ -16,7 +16,8 @@ import com.amazonaws.services.s3.AmazonS3Client;
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
 	private static final String URL = "";
-	
+	@SuppressWarnings("unused")
+	private static final String LOCAL = "";
 	// add view controllers for pages that deal with spring security
     public void addViewControllers(ViewControllerRegistry registry) {
 	    registry.addViewController("/login").setViewName("login");

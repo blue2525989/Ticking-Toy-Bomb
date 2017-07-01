@@ -20,7 +20,7 @@ public class InventoryController extends PermissionController {
 	
 
 	// instance of Repositories
-	private InventoryRepository inventory;
+	protected InventoryRepository inventory;
 	
 	// autowire the repository to the controller
 	@Autowired
@@ -34,10 +34,6 @@ public class InventoryController extends PermissionController {
 		JumbotronContent jumboMain = findLastJumbo();		
 		if (jumboMain != null) {
 			session.setAttribute("jumboMain", jumboMain);
-		}
-		List<InventoryItem> items = inventory.findAll();		
-		if (items != null) {
-			model.addAttribute("items", items);
 		}
 		// admin user
 		if (hasAdminRole()) {

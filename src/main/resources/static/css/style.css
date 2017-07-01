@@ -2,7 +2,6 @@ body {
 	background-color: #55c4ff;
 	font-family: arial,helvetica,sans-serif;
 }
-
 div.jumbotron {
   max-width: auto;
   height: auto;
@@ -18,11 +17,9 @@ img {
     height: auto;
     width: auto\9; /* ie8 */
 }
-
 div.blue-form-control {
   max-width: 75%;
 }
-
 footer {
 	border-radius: 3px;
 	font-size: 10px;
@@ -33,13 +30,10 @@ footer {
     margin: auto;
 	text-align: center;
 }
-
-
 .secret {
 	font-size: 6px;
 	color: #555753;
 }
-
 button {
     background-color: #4CAF50; /* Green */
     border-radius: 12px;
@@ -49,14 +43,12 @@ button {
     text-align: center;
     font-size: 16px;
 }
-
 .album {
   min-height: 50rem;
   padding-top: 3rem;
   padding-bottom: 3rem;
   background-color: transparent;
 }
-
 .card {
   float: left;
   width: 33.333%;
@@ -65,11 +57,9 @@ button {
   border: 0;  
   background-color: transparent;
 }
-
 .card > img {
   margin-bottom: .75rem;
 }
-
 .card-text {
   font-size: 85%;
 }

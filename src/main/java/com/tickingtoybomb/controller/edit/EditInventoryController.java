@@ -1,6 +1,5 @@
 package com.tickingtoybomb.controller.edit;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -84,8 +83,8 @@ public class EditInventoryController extends PermissionController {
 	// delete element
 	@GetMapping(path="/delete-item")
 	public String deleteItem(Long ID, HttpSession session) {
-		inventory.delete(ID);
 		String name = inventory.getOne(ID).getHeadline();
+		inventory.delete(ID);
 		// add javaScript document pop notifcation
 		String saved = "The Item " + name + " has been deleted.";
 		session.setAttribute("saved", saved);
