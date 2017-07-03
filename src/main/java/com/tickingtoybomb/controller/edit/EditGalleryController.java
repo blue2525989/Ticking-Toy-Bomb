@@ -68,11 +68,11 @@ public class EditGalleryController extends PermissionController {
 
 	// delete element
 	@GetMapping(path="/delete-card-gallery")
-	public String deleteCard(Long ID, HttpSession session) {
+	public String deleteCard(Long ID, Model model) {
 		card.delete(ID);
 		String saved = "The card with ID " + ID + " has been deleted.";
-		session.setAttribute("saved", saved);
-		return "redirect:/saved";
+		model.addAttribute("saved", saved);
+		return "admin/saved";
 	}
 		
 	// list all element

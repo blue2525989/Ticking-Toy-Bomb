@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,7 +35,7 @@ public class EmailService {
 	@RequestMapping("/sendEmail")
     public String sendMail(@RequestParam String name, @RequestParam String surname, @RequestParam String email, 
     	    @RequestParam String phone,  @RequestParam String message,
-    	    HttpSession session) {
+    	    HttpSession session, Model model) {
 
     	if (phone == null || phone == "") {
     		phone = "no phone #";
@@ -55,9 +56,13 @@ public class EmailService {
  		Content subjContent = new Content().withData(phone +" "+ name +" "+ surname +" "+ email);
  		Message msg = new Message().withSubject(subjContent);
  		
+ 		
  		// Include a body in HTML formats.
- 		Content htmlContent = new Content().withData(phone +"<br/>"+ name +"<br/>"+ surname +"<br/>"+ email
- 				+"<br/><br/><br/>"+ message);
+ 		Content htmlContent = new Content().withData("Phone number: " + phone 
+ 				+"<br/>"+ "<h2>First name:</h2> " + name 
+ 				+"<br/>"+ "<h2>Last name:</h2> " + surname 
+ 				+"<br/>"+ "<h2>Email address:</h2> " + email
+ 				+"<br/><br/><h2>Message,</h2><br/>"+ message);
  		Body body = new Body().withHtml(htmlContent);
  		msg.setBody(body);
  		
@@ -76,8 +81,8 @@ public class EmailService {
  		} catch (Exception e) {
  		   e.printStackTrace();
  		}
- 		String saved = "Thanks, Your email has been sent!";
- 		session.setAttribute("saved", saved);
- 		return "redirect:/saved";
+ 		String saved = "Your email has been sent!";
+ 		model.addAttribute("saved", saved);
+ 		return "admin/saved";
     }
 }

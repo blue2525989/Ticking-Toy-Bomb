@@ -72,11 +72,11 @@ public class EditContactController extends PermissionController {
 	
 	// delete element
 	@GetMapping(path="/delete-contact")
-	public String deleteContactFeature(Long ID, HttpSession session) {
+	public String deleteContactFeature(Long ID, Model model) {
 		feature.delete(ID);
 		String saved = "The Contact Content with ID " + ID + " has been deleted.";
-		session.setAttribute("saved", saved);
-		return "redirect:/saved";
+		model.addAttribute("saved", saved);
+		return "admin/saved";
 	}
 		
 	// list all element

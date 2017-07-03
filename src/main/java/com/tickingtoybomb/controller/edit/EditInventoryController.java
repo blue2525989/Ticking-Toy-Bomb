@@ -82,13 +82,13 @@ public class EditInventoryController extends PermissionController {
 	
 	// delete element
 	@GetMapping(path="/delete-item")
-	public String deleteItem(Long ID, HttpSession session) {
+	public String deleteItem(Long ID, Model model) {
 		String name = inventory.getOne(ID).getHeadline();
 		inventory.delete(ID);
 		// add javaScript document pop notifcation
 		String saved = "The Item " + name + " has been deleted.";
-		session.setAttribute("saved", saved);
-		return "redirect:/saved";
+		model.addAttribute("saved", saved);
+		return "admin/saved";
 	}
 		
 	// list all element

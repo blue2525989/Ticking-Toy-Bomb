@@ -43,7 +43,7 @@ public class FileService extends PermissionController {
 	// uses javaScript to upload, mainly just redirects to saved
 	@RequestMapping("/upload-image")
 	public String upload2(@RequestParam MultipartFile file, HttpSession session,
-			MultipartRequest event, @RequestParam String type) {
+			MultipartRequest event, Model model, @RequestParam String type) {
 		/*
 		 * Obtain the Content length of the Input stream for S3 header
 		 */
@@ -114,7 +114,7 @@ public class FileService extends PermissionController {
 		}
 
 		String saved = "Image " + file.getOriginalFilename() + " has been saved.";
-		session.setAttribute("saved", saved);
+		model.addAttribute("saved", saved);
 		return "redirect:/saved";
 	}
 	
@@ -134,14 +134,14 @@ public class FileService extends PermissionController {
 	
 	// delete element
 	@GetMapping(path="/delete-image")
-	public String deleteImages(Long ID, HttpSession session) {
+	public String deleteImages(Long ID, Model model) {
 		// need to add aws code to delete from bucket
 		String file = imgRepo.findOne(ID).getName();
 		imgRepo.delete(ID);
 		s3client.deleteObject(new DeleteObjectRequest("", file));
 		String saved = "The Image with Name " + file + " has been deleted.";
-		session.setAttribute("saved", saved);
-		return "redirect:/saved";
+		model.addAttribute("saved", saved);
+		return "admin/saved";
 	}
 		
 	// list all element

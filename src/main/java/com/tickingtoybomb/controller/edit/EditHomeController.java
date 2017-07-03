@@ -81,12 +81,12 @@ public class EditHomeController extends PermissionController {
 	
 	// delete element
 	@GetMapping(path="/delete-jumbo")
-	public String deleteSingleJumbo(Long ID, HttpSession session) {
+	public String deleteSingleJumbo(Long ID, Model model) {
 		jumbo.delete(ID);
 		// add javaScript document pop notifcation
 		String saved = "The jumbotron with ID " + ID + " has been deleted.";
-		session.setAttribute("saved", saved);
-		return "redirect:/saved";
+		model.addAttribute("saved", saved);
+		return "admin/saved";
 	}
 	
 	// list all element
@@ -118,12 +118,12 @@ public class EditHomeController extends PermissionController {
 	
 	// delete element
 	@GetMapping(path="/delete-card")
-	public String deleteCard(Long ID, HttpSession session) {
+	public String deleteCard(Long ID, Model model) {
 		card.delete(ID);
 		// add javaScript document pop notifcation
 		String saved = "The card with ID " + ID + " has been deleted.";
-		session.setAttribute("saved", saved);
-		return "redirect:/saved";
+		model.addAttribute("saved", saved);
+		return "admin/saved";
 	}
 		
 	// list all element
@@ -154,12 +154,12 @@ public class EditHomeController extends PermissionController {
 	
 	// delete element
 	@GetMapping(path="/delete-feature")
-	public String deleteFeature(Long ID, HttpSession session) {
+	public String deleteFeature(Long ID, Model model) {
 		feature.delete(ID);
 		// add javaScript document pop notifcation
 		String saved = "The feature with ID " + ID + " has been deleted.";
-		session.setAttribute("saved", saved);
-		return "redirect:/saved";
+		model.addAttribute("saved", saved);
+		return "admin/saved";
 	}
 		
 	// list all element

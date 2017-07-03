@@ -53,16 +53,43 @@ public class SearchController extends PermissionController {
 	}
 	
 	// use this method second
+	
+	/* working for now with multiple search words but 
+	 * catches other items not containing main keywords
+	 * 
+	 */
 	public List<InventoryItem> findByHeadlineItem(List<InventoryItem> itemsMain, String type) {
 		List<InventoryItem> items = inventory.findAll();
 		List<InventoryItem> realItems = new ArrayList<InventoryItem>();
-		// need to break type and headline down if contains " "
-		// use string array inside loop
-		
+		type = type.toLowerCase();
+		if (type.contains(" ")) {
+			String[] words = type.split(" ");
+			boolean containsKey = true;
+			for (int j = 0; j <= items.size()-1; j++) {
+				for (int i = 1; i < words.length; i++) {
+					if (items.get(j).getHeadline().toLowerCase().contains(words[i]) && 
+							items.get(j).getHeadline().toLowerCase().contains(words[0]) && 
+							!itemsMain.contains(items.get(i))) {
+						containsKey = true;					
+					}
+					else if (items.get(j).getHeadline().equalsIgnoreCase(words[i]) && 
+							items.get(j).getHeadline().toLowerCase().contains(words[0]) && 
+							!itemsMain.contains(items.get(i))) {
+						containsKey = true;
+					}
+					else {
+						containsKey = false;
+					}
+				}
+				if (containsKey) {
+					realItems.add(items.get(j));
+				}
+			}
+		}
 		// go through list and add if type matches
-		if (items != null) {
+		else {
 			for (int i = 0; i <= items.size()-1; i++) {				
-				if (items.get(i).getHeadline().toLowerCase().contains(type.toLowerCase()) && 
+				if (items.get(i).getHeadline().toLowerCase().contains(type) && 
 						!itemsMain.contains(items.get(i))) {
 					realItems.add(items.get(i));					
 				}
@@ -74,7 +101,7 @@ public class SearchController extends PermissionController {
 		}		
 		return realItems;
 	}
-	
+
 	// use this method first
 	public List<InventoryItem> findByTypeItem(String type) {
 		List<InventoryItem> items = inventory.findAll();

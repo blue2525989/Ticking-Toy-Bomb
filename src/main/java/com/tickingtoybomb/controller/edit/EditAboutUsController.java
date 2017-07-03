@@ -68,11 +68,11 @@ public class EditAboutUsController extends PermissionController {
 	
 	// delete element
 	@GetMapping(path="/delete-about-content")
-	public String deleteFeature(Long ID, HttpSession session) {
+	public String deleteFeature(Long ID, Model model) {
 		about.delete(ID);
 		String saved = "The About Content with ID " + ID + " has been deleted.";
-		session.setAttribute("saved", saved);
-		return "redirect:/saved";
+		model.addAttribute("saved", saved);
+		return "admin/saved";
 	}
 		
 	// list all element

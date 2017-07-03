@@ -1,10 +1,12 @@
 package com.tickingtoybomb.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tickingtoybomb.model.GalleryCardContent;
@@ -21,9 +23,9 @@ public class GalleryController extends PermissionController {
 	}
 	
 	@RequestMapping("/gallery")
-	public String gallery(HttpSession session) {
+	public String gallery(HttpSession session, Model model) {
 		// adds the three most current cards
-		findLastNineCards(session);
+		findLastNineCards(model);
 		// adds last jumbo 
 		JumbotronContent jumboMain = findLastJumbo();		
 		if (jumboMain != null) {
@@ -40,8 +42,9 @@ public class GalleryController extends PermissionController {
 		return "gallery/gallery";
 	}
 	
-	private void findLastNineCards(HttpSession session) {
+	private void findLastNineCards(Model model) {
 		long size = card.count();
+		List<GalleryCardContent> realList = new ArrayList<GalleryCardContent>();
 		GalleryCardContent card1 = new GalleryCardContent();
 		GalleryCardContent card2 = new GalleryCardContent();
 		GalleryCardContent card3 = new GalleryCardContent();
@@ -54,23 +57,26 @@ public class GalleryController extends PermissionController {
 			for (int i = 0; i <= cards.size()-1; i++) {
 				if (cards.get(i).getType().equals("card1")) {
 					card1 = cards.get(i);
-					session.setAttribute("card1", card1);
+					realList.add(card1);
 				} else if (cards.get(i).getType().equals("card2")) {
 					card2 = cards.get(i);
-					session.setAttribute("card2", card2);
+					realList.add(card2);
 				} else if (cards.get(i).getType().equals("card3")) {
 					card3 = cards.get(i);
-					session.setAttribute("card3", card3);
+					realList.add(card3);
 				} else if (cards.get(i).getType().equals("card4")) {
 					card4 = cards.get(i);
-					session.setAttribute("card4", card4);
+					realList.add(card4);
 				} else if (cards.get(i).getType().equals("card5")) {
 					card5 = cards.get(i);
-					session.setAttribute("card5", card5);
+					realList.add(card5);
 				} else if (cards.get(i).getType().equals("card6")) {
 					card6 = cards.get(i);
-					session.setAttribute("card6", card6);
+					realList.add(card6);
 				}
+			}
+			if (realList != null) {
+				model.addAttribute("cardList", realList);
 			}
 		} else {
 			card1.setHeadline("Blue's website and software design");
@@ -95,12 +101,13 @@ public class GalleryController extends PermissionController {
 			card6.setHeadline("Blue's website and software design");
 			card6.setContent(content);
 			card6.setUrl("https://s3-us-west-2.amazonaws.com/blue-company-images/computer-02.jpg");
-			session.setAttribute("card1", card1);
-			session.setAttribute("card2", card2);
-			session.setAttribute("card3", card3);
-			session.setAttribute("card4", card4);
-			session.setAttribute("card5", card5);
-			session.setAttribute("card6", card6);
+			realList.add(card1);
+			realList.add(card2);
+			realList.add(card3);
+			realList.add(card4);
+			realList.add(card5);
+			realList.add(card6);
+			model.addAttribute("cardList", realList);
 		}
 	}
 }

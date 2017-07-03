@@ -47,7 +47,7 @@ public class EditPayPalButtonController extends PermissionController {
 	}
 	
 	@RequestMapping("/create-paypal-button")
-	public String uploadPayPalButton(HttpSession session,
+	public String uploadPayPalButton(HttpSession session, Model model,
 			@RequestParam String name, @RequestParam String content) {
 
 		PayPalButton button = new PayPalButton();
@@ -65,19 +65,19 @@ public class EditPayPalButtonController extends PermissionController {
 		}
 
 		String saved = "Button, " + name + ", has been saved.";
-		session.setAttribute("saved", saved);
-		return "redirect:/saved";
+		model.addAttribute("saved", saved);
+		return "admin/saved";
 	}
 	
 	// delete element
 	@GetMapping(path="/delete-paypal-button")
-	public String deleteButtons(Long ID, HttpSession session) {
+	public String deleteButtons(Long ID, Model model) {
 		// need to add aws code to delete from bucket
 		String file = buttons.findOne(ID).getName();
 		buttons.delete(ID);
 		s3client.deleteObject(new DeleteObjectRequest("ticking-toy-bomb-images/paypal-buttons", file));
 		String saved = "The button with Name " + file + " has been deleted.";
-		session.setAttribute("saved", saved);
+		model.addAttribute("saved", saved);
 		return "redirect:/saved";
 	}
 		
