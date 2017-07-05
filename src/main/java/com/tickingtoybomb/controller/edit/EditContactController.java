@@ -35,9 +35,8 @@ public class EditContactController extends PermissionController {
 
 
 	@RequestMapping("/edit-contact")
-	public String admin(HttpSession session) {
-		// admin user
-		
+	public String admin(HttpSession session, Model model) {
+		addTypesForMenu(model);		
 		// adds full list from gallery
 		// need to work on slimming down list.
 		List<Image> imageList = imgRepo.findAll();
@@ -73,6 +72,7 @@ public class EditContactController extends PermissionController {
 	// delete element
 	@GetMapping(path="/delete-contact")
 	public String deleteContactFeature(Long ID, Model model) {
+		addTypesForMenu(model);
 		feature.delete(ID);
 		String saved = "The Contact Content with ID " + ID + " has been deleted.";
 		model.addAttribute("saved", saved);
@@ -82,6 +82,7 @@ public class EditContactController extends PermissionController {
 	// list all element
 	@RequestMapping("/list-contact")
 	public String listAllContactFeatures(Model model) {
+		addTypesForMenu(model);
 		List<ContactFeatureContent> featureList = feature.findAll();
 		if (featureList != null) {
 			model.addAttribute("listMain", featureList);

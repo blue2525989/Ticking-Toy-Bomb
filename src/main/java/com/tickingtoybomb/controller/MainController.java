@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tickingtoybomb.model.CardContent;
@@ -29,7 +30,8 @@ public class MainController extends PermissionController {
 	}
 	
 	@RequestMapping("/")
-	public String index(HttpSession session) {
+	public String index(HttpSession session, Model model) {
+		addTypesForMenu(model);
 		// adds last jumbo 
 		JumbotronContent jumboMain = findLastJumbo();		
 		if (jumboMain != null) {

@@ -45,6 +45,7 @@ public class EditHomeController extends PermissionController {
 
 	@RequestMapping("/edit-home")
 	public String admin(HttpSession session, Model model) {
+		addTypesForMenu(model);
 		
 		// adds full list from gallery
 		// need to work on slimming down list.
@@ -82,6 +83,7 @@ public class EditHomeController extends PermissionController {
 	// delete element
 	@GetMapping(path="/delete-jumbo")
 	public String deleteSingleJumbo(Long ID, Model model) {
+		addTypesForMenu(model);
 		jumbo.delete(ID);
 		// add javaScript document pop notifcation
 		String saved = "The jumbotron with ID " + ID + " has been deleted.";
@@ -92,6 +94,7 @@ public class EditHomeController extends PermissionController {
 	// list all element
 	@RequestMapping("/list-jumbo")
 	public String listAllUpdates(Model model) {
+		addTypesForMenu(model);
 		Iterable<JumbotronContent> jumboList = jumbo.findAll();
 		// Iterator iter = jumboList.iterator();
 		if (jumboList != null) {
@@ -119,6 +122,7 @@ public class EditHomeController extends PermissionController {
 	// delete element
 	@GetMapping(path="/delete-card")
 	public String deleteCard(Long ID, Model model) {
+		addTypesForMenu(model);
 		card.delete(ID);
 		// add javaScript document pop notifcation
 		String saved = "The card with ID " + ID + " has been deleted.";
@@ -129,6 +133,7 @@ public class EditHomeController extends PermissionController {
 	// list all element
 	@RequestMapping("/list-card")
 	public String listAllcards(Model model) {
+		addTypesForMenu(model);
 		List<CardContent> cardList = card.findAll();
 		// Iterator iter = jumboList.iterator();
 		if (cardList != null) {
@@ -155,6 +160,7 @@ public class EditHomeController extends PermissionController {
 	// delete element
 	@GetMapping(path="/delete-feature")
 	public String deleteFeature(Long ID, Model model) {
+		addTypesForMenu(model);
 		feature.delete(ID);
 		// add javaScript document pop notifcation
 		String saved = "The feature with ID " + ID + " has been deleted.";
@@ -165,6 +171,7 @@ public class EditHomeController extends PermissionController {
 	// list all element
 	@RequestMapping("/list-feature")
 	public String listAllFeatures(Model model) {
+		addTypesForMenu(model);
 		List<FeatureContent> featureList = feature.findAll();
 		// Iterator iter = jumboList.iterator();
 		if (featureList != null) {

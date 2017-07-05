@@ -20,7 +20,7 @@ function plusSlides(n) {
 
 /* show current slide */
 function currentSlide(n) {
-	showSlides(slideindex = n);
+	showSlides(slideIndex = n);
 }
 
 /* show slides */
@@ -35,9 +35,8 @@ function showSlides(n) {
 		slides[i].style.display = "none";
 	}
 	for (i = 0; i < dots.length; i++) {
-		dots[i].className= dots[i].className.replace("active", " ");
+		dots[i].className= dots[i].className.replace("active", "");
 	}
 	slides[slideIndex-1].style.display = "block";
-	dots[slideIndex-1].className += "active";
 	captionText.innerHTML = dots[slideIndex-1].alt;
 }

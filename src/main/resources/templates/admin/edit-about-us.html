@@ -8,34 +8,13 @@
 		
 	<div class="container">
 	<h1>Edit About Us Page</h1>
-	 <!-- administration menu, hard coded so wont confuse fragments.html-->
-		    <nav id="admin">
-				<hr/>
-				<ul>
-							
-				<li><a href="/admin"><button type="button" class="btn btn-success">
-					Administration page</button></a></li>
-				<li><a href="/edit-home"><button type="button" class="btn btn-success">
-					Edit Home page</button></a></li>
-				<li><a href="/edit-inventory"><button type="button" class="btn btn-success">
-					Edit Inventory page</button></a></li>
-				<li><a href="/edit-about"><button type="button" class="btn btn-success">
-					Edit About us page</button></a></li>
-				<li><a href="/edit-contact"><button type="button" class="btn btn-success">
-					Edit Contact page</button></a></li>
-				<li><a href="/edit-gallery"><button type="button" class="btn btn-success">
-					Edit Gallery page</button></a></li>
-				<li><a href="/upload-page"><button type="button" class="btn btn-success">
-					Upload Images</button></a></li>
-				<li><a href="/edit-paypal-button"><button type="button" class="btn btn-success">
-					Add new PalPay Button</button></a></li>
-				</ul>
-				<hr/>
-			</nav>
+	 <!-- administration menu-->
+	<div th:replace="fragments::admin-menu"></div>
 		<hr/>
 
 
 		<!-- form for editing headline and content-->
+		<h2>Edit the content on About us page</h2>
 		<form action="/edit-about/edit-about-content" method="post">        
        		<div class="form-group">
 			  <label class="col-3 col-form-label">Enter a Headline.</label>
@@ -54,12 +33,17 @@
 			    required="required" data-error="Content is required." ></textarea>
 			    <div class="help-block with-errors"></div>
 			  </div>
-			   <!-- add image from bucket-->
-		        <select name="url">
+
+			  	<!-- add image from bucket-->
+			  	<div class="form-group col-4">
+			  	<label>Select an image:</label>
+		        <select class="form-control"  name="url">
 		            <option th:each="image : ${session.imageList}"
 		                    th:text="${image.name}"
 		                    th:value="${image.url}"></option>
 		        </select>
+			  </div>
+			  <br/><br/>
 			  
              <button type="submit" class="btn btn-success">Edit Paragraph</button> 
         </form> 

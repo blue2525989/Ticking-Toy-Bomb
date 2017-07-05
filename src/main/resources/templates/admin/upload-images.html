@@ -34,21 +34,65 @@
 			</nav>
 					<hr/>
 		
+		<h2>Enter a new category for saving images.</h2>
+		<form action="/new-image-type" method="POST">
+				<label>Name (what users see in drop down menu):</label><br />
+				<input type="text" name="name" size="30" class="name"  
+				required="required" data-error="name is required." />
+				<div class="help-block with-errors"></div><br />
+				
+				<label>Type (used for grouping together like items for searching):</label><br />
+				<label>No spaces in TYPE field, these will become new folders within S3 storage.</label><br/>
+				<input type="text" name="type" size="30" class="name"  
+				required="required" data-error="type is required." />
+				<div class="help-block with-errors"></div><br />
+				<button type="submit" id="button">Add Image Type</button>
+				<br />
+		</form>
+		
+		        
+        <br/><br/>
+        <!-- delete based on ID -->
+        	<h2>Delete entry based on ID number</h2>
+			<form action="/delete-image-type" method="GET">
+				<label for="ID">ID:</label><br />
+				<input type="text" name="ID" size="50" class="ID"  
+				required="required" data-error="ID is required." />
+				<div class="help-block with-errors"></div><br />	
+				<h3>Click this button to delete entry</h3><br />
+				<button type="submit" id="button">Delete</button>
+				<br />
+			</form>
+				
+		<br/><br/>
 
+		<!-- list all for figuring out ID -->				
+			<h2>List all image types</h2>
+			<form action="/list-images-type" method="GET">
+				<button type="submit" id="button">List all</button><br />
+			</form>
+				
+				
+		<br/><br/><hr/>
+		
+		<br/>
+		<h2>Choose a file and category to upload an image to storage.</h2>
         <form action="/upload-image" method="POST" enctype="multipart/form-data">        
 	
-			<!-- this uses angularJS to have text box that
-			user can type and update in real time -->
-					 	
-		        <select name="type">
-		            <option value="necklace">Necklace</option>
-		            <option value="earring">Earrings</option>
-		            <option value="bracelet">Bracelet</option>
-		            <option value="accessory">Accessory</option>
-		            <option value="other">Other</option>
+			<!-- list image types -->
+				<div class="form-group col-4">	 	
+		        <select class="form-control" name="type">
+		            <option  th:each="imgType : ${fullList}"
+		            th:value="${imgType.type}" th:text="${imgType.name}"></option>
 		        </select>
+			 	</div>
+			 	<br/>
+			 	<div class="form-group">
+			 	<input name="file" class="form-control-file" type="file" id="file-chooser" /><br/>
+			 	<small id="fileHelp" class="form-text text-muted">Select a image from your computer and choose a corresponding 
+			 	category to go along with it, then click Upload to S3 to save the image.</small>
+			 	</div>
 			 	
-			 	<input name="file" type="file" id="file-chooser" /><br/>
 			 	<br/>
 			    <button type="submit" id="upload-button">Upload to S3</button>
 		</form>
@@ -69,16 +113,16 @@
 		<br/><br/>
 
 		<!-- list all for figuring out ID -->				
-			<h2>List all</h2>
+			<h2>List all images by category</h2>
 			<form action="/list-images" method="GET">
-		        <select name="type">
-		            <option value="necklace">Necklace</option>
-		            <option value="earring">Earrings</option>
-		            <option value="bracelet">Bracelet</option>
-		            <option value="accessory">Accessory</option>
-		            <option value="other">Other</option>
+			<!-- list image types -->
+				<div class="form-group col-4">	 	
+		        <select class="form-control" name="type">
+		            <option  th:each="imgType : ${fullList}"
+		            th:value="${imgType.type}" th:text="${imgType.name}"></option>
 		        </select>
-			 	<br/>
+		        </div>
+		        <br/>
 				<button type="submit" id="button">List all</button><br />
 			</form>
 				

@@ -9,7 +9,6 @@
 	<div class="container">
 	 <!-- administration menu-->
 	<div th:replace="fragments::admin-menu"></div>
-	
 					<hr/>
 
 			<article>
@@ -21,22 +20,14 @@
 							<span th:if="${update.id}" th:text="${update.id}">ID: </span> <br/>
 							<span th:if="${update.id eq null}">No ID available</span> <br/>	
 							
+							<label>Name:</label>
+							<span th:if="${update.name}" th:text="${update.name}">Name: </span> <br/>
+							<span th:if="${update.name eq null}">No name available</span> <br/>
+						
 							<label>Type:</label>
 							<span th:if="${update.type}" th:text="${update.type}">Type: </span> <br/>
 							<span th:if="${update.type eq null}">No type available</span> <br/>
 							
-							<label>Headline:</label>
-							<span th:if="${update.headline}" th:text="${update.headline}">Headline: </span> <br/>
-							<span th:if="${update.headline eq null}">No headline available</span> <br/>
-							
-							<label>Content:</label>
-							<span th:if="${update.content}" th:text="${update.content}">Content: </span> <br/>
-							<span th:if="${update.content eq null}">No content available</span> <br/>
-
-							<!-- add the image from bucket -->
-       						<img th:attr="src=${update.url},title=${update.headline},alt=${update.headline}" /><br/>
-           
-           
 						</dt>
 						</dl>
 					</div>

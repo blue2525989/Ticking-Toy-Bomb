@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tickingtoybomb.model.AboutContent;
@@ -25,12 +26,13 @@ public class AboutController extends PermissionController {
 
 	
 	@RequestMapping("/about")
-	public String about(HttpSession session) {
+	public String about(HttpSession session, Model model) {
 		// adds last jumbo 
 		JumbotronContent jumboMain = findLastJumbo();		
 		if (jumboMain != null) {
 			session.setAttribute("jumboMain", jumboMain);
 		}
+		addTypesForMenu(model);
 		// try just counting instead of returning full list to speed up times
 		long size = about.count();
 		if (size > 0) {

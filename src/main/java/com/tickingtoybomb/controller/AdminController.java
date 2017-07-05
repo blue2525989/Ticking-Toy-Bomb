@@ -3,6 +3,7 @@ package com.tickingtoybomb.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tickingtoybomb.model.JumbotronContent;
@@ -11,7 +12,9 @@ import com.tickingtoybomb.model.JumbotronContent;
 public class AdminController extends PermissionController {
 
 	@RequestMapping("/admin")
-	public String admin(HttpSession session) {
+	public String admin(HttpSession session, Model model) {
+
+		addTypesForMenu(model);
 		// admin user
 		if (hasAdminRole()) {
 			session.setAttribute("adminrole", hasAdminRole());
@@ -24,8 +27,9 @@ public class AdminController extends PermissionController {
 	}
 	
 	@RequestMapping("/saved")
-	public String saved(HttpSession session) {
+	public String saved(HttpSession session, Model model) {
 		// adds last jumbo 
+		addTypesForMenu(model);
 		JumbotronContent jumboMain = findLastJumbo();		
 		if (jumboMain != null) {
 			session.setAttribute("jumboMain", jumboMain);
@@ -42,7 +46,8 @@ public class AdminController extends PermissionController {
 	}
 	
 	@RequestMapping("/list-all")
-	public String listAll(HttpSession session) {
+	public String listAll(HttpSession session, Model model) {
+		addTypesForMenu(model);
 		// admin user
 		if (hasAdminRole()) {
 			session.setAttribute("adminrole", hasAdminRole());
@@ -55,7 +60,8 @@ public class AdminController extends PermissionController {
 	}
 	
 	@RequestMapping("/list-all-type")
-	public String listAllType(HttpSession session) {
+	public String listAllType(HttpSession session, Model model) {
+		addTypesForMenu(model);
 		// admin user
 		if (hasAdminRole()) {
 			session.setAttribute("adminrole", hasAdminRole());

@@ -7,30 +7,9 @@
 	<nav th:replace="fragments::nav"></nav>
 		
 	<div class="container">
-	 <!-- administration menu, hard coded so wont confuse fragments.html-->
-		    <nav id="admin" th:if="${session.adminrole == true}">
-				<hr/>
-				<ul>
-							
-				<li><a href="/admin"><button type="button" class="btn btn-success">
-					Administration page</button></a></li>
-				<li><a href="/edit-home"><button type="button" class="btn btn-success">
-					Edit Home page</button></a></li>
-				<li><a href="/edit-inventory"><button type="button" class="btn btn-success">
-					Edit Inventory page</button></a></li>
-				<li><a href="/edit-about"><button type="button" class="btn btn-success">
-					Edit About us page</button></a></li>
-				<li><a href="/edit-contact"><button type="button" class="btn btn-success">
-					Edit Contact page</button></a></li>
-				<li><a href="/edit-gallery"><button type="button" class="btn btn-success">
-					Edit Gallery page</button></a></li>
-				<li><a href="/upload-page"><button type="button" class="btn btn-success">
-					Upload Images</button></a></li>
-				<li><a href="/edit-paypal-button"><button type="button" class="btn btn-success">
-					Add new PalPay Button</button></a></li>
-				</ul>
-				<hr/>
-			</nav>
+	<h1>Edit Home Page</h1>
+	 <!-- administration menu-->
+	<div th:replace="fragments::admin-menu"></div>
 	
 					<hr/>
 					
@@ -39,7 +18,7 @@
 		
 		
 		<!-- form for editing JUMBOTRON headline and content-->
-		<h1>Edit JumboTron</h1><br/>
+		<h2>Edit JumboTron</h2><br/>
 		<form action="/edit-home/edit-jumbo" method="post">        
        		<div class="form-group">
 			  <label class="col-3 col-form-label">Enter a Headline for the JumboTron.</label>
@@ -52,19 +31,25 @@
 			</div>
 			
 			<div class="form-group">
-			    <label class="col-3">Enter a brief paragraph to impose on the JumboTron. This section 
-			    contains a button the takes users to your services page, so maybe a lead into that.</label>
+			    <span class="col-3">Enter a brief paragraph to impose on the JumboTron. This section 
+			    contains a button the takes users to your services page, so maybe a lead into that.</span>
 			    <br/>
 			    <textarea class="form-control col-6" name="content" rows="4"
 			     required="required" data-error="Content is required." ></textarea>
 			    <div class="help-block with-errors"></div>
 			  </div>
 			  			  			  <!-- add image from bucket-->
-		        <select name="url">
+			  	
+
+			  	<!-- add image from bucket-->
+			  	<div class="form-group col-4">
+			  	<label>Select an image:</label>
+		        <select class="form-control"  name="url">
 		            <option th:each="image : ${session.imageList}"
 		                    th:text="${image.name}"
 		                    th:value="${image.url}"></option>
 		        </select>
+		        </div>
 		        <br/>
              <button type="submit" class="btn btn-success">Edit JumboTron</button> 
         </form> 
@@ -93,7 +78,7 @@
 				
 		<br/><br/><hr/>
         <!-- form for  GALLERY CARD editing headline and content-->
-        <h1>Edit Gallery Card</h1><br/>
+        <h2>Edit Gallery Card</h2><br/>
 		<form action="/edit-home/edit-card1" method="post">        
        		<div class="form-group">
 			  <label class="col-3 col-form-label">Enter a Headline for Gallery Card.</label>
@@ -106,7 +91,7 @@
 			</div>
 			
 			<div class="form-group">
-			    <label class="col-3">Enter a brief paragraph to direct people to your gallery.</label>
+			    <span class="col-3">Enter a brief paragraph to direct people to your gallery.</span>
 			    <br/>
 			    <textarea class="form-control col-6" name="content" rows="4"
 			     required="required" data-error="Content is required." ></textarea>
@@ -120,7 +105,7 @@
 				
 		<br/><br/><hr/>
         <!-- form for  ABOUT US CARD editing headline and content-->
-        <h1>Edit About us Card</h1><br/>
+        <h2>Edit About us Card</h2><br/>
 		<form action="/edit-home/edit-card1" method="post">        
        		<div class="form-group">
 			  <label class="col-3 col-form-label">Enter a Headline for About Us Card.</label>
@@ -133,7 +118,7 @@
 			</div>
 			
 			<div class="form-group">
-			    <label class="col-3">Enter a brief paragraph to direct people to about us page.</label>
+			    <span class="col-3">Enter a brief paragraph to direct people to about us page.</span>
 			    <br/>
 			    <textarea class="form-control col-6" name="content" rows="4"
 			     required="required" data-error="Content is required." ></textarea>
@@ -148,7 +133,7 @@
 		<br/><br/><hr/>
 		
         <!-- form for  CONTACT CARD editing headline and content-->
-        <h1>Edit Contact Us Card</h1><br/>
+        <h2>Edit Contact Us Card</h2><br/>
 		<form action="/edit-home/edit-card1" method="post">        
        		<div class="form-group">
 			  <label class="col-3 col-form-label">Enter a Headline for Contact Card.</label>
@@ -161,7 +146,7 @@
 			</div>
 			
 			<div class="form-group">
-			    <label class="col-3">Enter a brief paragraph to let know people where to contact you.</label>
+			    <span class="col-3">Enter a brief paragraph to let know people where to contact you.</span>
 			    <br/>
 			    <textarea class="form-control col-6" name="content" rows="4"
 			     required="required" data-error="Content is required." ></textarea>
@@ -216,14 +201,18 @@
 			    required="required" data-error="Content is required." ></textarea>
 			    <div class="help-block with-errors"></div>
 			  </div>
-			  			  <!-- add image from bucket-->
-			  	<label class="col-3">Select a image</label>
-			  	<br/>
-		        <select name="url">
+			  	
+			  	
+
+			  	<!-- add image from bucket-->
+			  	<div class="form-group col-4">
+			  	<label>Select an image:</label>
+		        <select class="form-control"  name="url">
 		            <option th:each="image : ${session.imageList}"
 		                    th:text="${image.name}"
 		                    th:value="${image.url}"></option>
 		        </select>
+		        </div>
 		        <br/>
              <button type="submit" class="btn btn-success">Edit Bottom Feature</button> 
         </form> 
@@ -236,6 +225,7 @@
 				<input type="text" name="ID" size="50" class="ID"  
 				required="required" data-error="ID is required." />
 				<div class="help-block with-errors"></div><br />	
+				
 				<h3>Click this button to delete entry</h3><br />
 				<button type="submit" id="button">Delete</button>
 				<br />

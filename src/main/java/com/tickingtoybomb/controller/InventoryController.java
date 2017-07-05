@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tickingtoybomb.model.InventoryItem;
@@ -30,6 +31,7 @@ public class InventoryController extends PermissionController {
 
 	@RequestMapping("/inventory")
 	public String services(HttpSession session, Model model) {
+		addTypesForMenu(model);
 		// adds last jumbo 
 		JumbotronContent jumboMain = findLastJumbo();		
 		if (jumboMain != null) {
@@ -47,14 +49,15 @@ public class InventoryController extends PermissionController {
 	}
 	
 
-	@RequestMapping("/inventory-necklace")
-	public String necklace(HttpSession session, Model model) {
+	@RequestMapping("/inventory-{type}")
+	public String necklace(HttpSession session, Model model, @PathVariable String type) {
+		addTypesForMenu(model);
 		// adds last jumbo 
 		JumbotronContent jumboMain = findLastJumbo();		
 		if (jumboMain != null) {
 			session.setAttribute("jumboMain", jumboMain);
 		}
-		List<InventoryItem> items = findByTypeItem("necklace");		
+		List<InventoryItem> items = findByTypeItem(type);		
 		if (items != null) {
 			model.addAttribute("items", items);
 		}
@@ -68,77 +71,6 @@ public class InventoryController extends PermissionController {
 		}
 		return "inventory/inventory";
 	}
-	
-
-	@RequestMapping("/inventory-earring")
-	public String earrings(HttpSession session, Model model) {
-		// adds last jumbo 
-		JumbotronContent jumboMain = findLastJumbo();		
-		if (jumboMain != null) {
-			session.setAttribute("jumboMain", jumboMain);
-		}
-		List<InventoryItem> items = findByTypeItem("earring");		
-		if (items != null) {
-			model.addAttribute("items", items);
-		}
-		// admin user
-		if (hasAdminRole()) {
-			session.setAttribute("adminrole", hasAdminRole());
-			}
-		// regular user
-		else if (hasUserRole()) {
-			session.setAttribute("userrole", hasUserRole());
-		}
-		return "inventory/inventory";
-	}
-	
-
-	@RequestMapping("/inventory-accessories")
-	public String accessories(HttpSession session, Model model) {
-		// adds last jumbo 
-		JumbotronContent jumboMain = findLastJumbo();		
-		if (jumboMain != null) {
-			session.setAttribute("jumboMain", jumboMain);
-		}
-		List<InventoryItem> items = findByTypeItem("accessory");
-		items.addAll(findByTypeItem("bracelet"));
-		if (items != null) {
-			model.addAttribute("items", items);
-		}
-		// admin user
-		if (hasAdminRole()) {
-			session.setAttribute("adminrole", hasAdminRole());
-			}
-		// regular user
-		else if (hasUserRole()) {
-			session.setAttribute("userrole", hasUserRole());
-		}
-		return "inventory/inventory";
-	}
-	
-	@RequestMapping("/inventory-other")
-	public String other(HttpSession session, Model model) {
-		// adds last jumbo 
-		JumbotronContent jumboMain = findLastJumbo();		
-		if (jumboMain != null) {
-			session.setAttribute("jumboMain", jumboMain);
-		}
-		List<InventoryItem> items = findByTypeItem("other");
-		if (items != null) {
-			model.addAttribute("items", items);
-		}
-		// admin user
-		if (hasAdminRole()) {
-			session.setAttribute("adminrole", hasAdminRole());
-			}
-		// regular user
-		else if (hasUserRole()) {
-			session.setAttribute("userrole", hasUserRole());
-		}
-		return "inventory/inventory";
-	}
-	
-	
 	
 	public List<InventoryItem> findByTypeItem(String type) {
 		List<InventoryItem> items = inventory.findAll();

@@ -6,10 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
 
 import com.tickingtoybomb.model.Image;
+import com.tickingtoybomb.model.ImageTypes;
 import com.tickingtoybomb.model.JumbotronContent;
 import com.tickingtoybomb.repository.ImageRepository;
+import com.tickingtoybomb.repository.ImageTypeRepository;
 import com.tickingtoybomb.repository.JumboTronRepository;
 
 public class PermissionController {
@@ -17,7 +20,10 @@ public class PermissionController {
 	// instance of Repositories
 	@Autowired
 	private JumboTronRepository jumbo;
+	@Autowired
 	private ImageRepository imgRepo;
+	@Autowired
+	private ImageTypeRepository imgTypeRepo;
 	// autowire the repository to the controller
 	
 
@@ -78,5 +84,18 @@ public class PermissionController {
 			}
 		}
 		return realList;
+	}
+	
+	protected void addTypesForMenu(Model model) {
+		List<ImageTypes> imgTypes = imgTypeRepo.findAll();
+		List<ImageTypes> realList = new ArrayList<ImageTypes>();
+		for (int i = 0; i < imgTypes.size(); i++) {
+			if (!imgTypes.get(i).getType().equals("system")) {
+				realList.add(imgTypes.get(i));
+			}
+		}
+		if (realList != null) {
+			model.addAttribute("imgTypes", realList);
+		}
 	}
 }

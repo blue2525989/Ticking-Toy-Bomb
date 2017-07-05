@@ -8,33 +8,11 @@
 		
 	<div class="container">
 	<h1>Edit PayPal Buttons</h1>
-	 <!-- administration menu, hard coded so wont confuse fragments.html-->
-		    <nav id="admin">
-				<hr/>
-				<ul>
-							
-				<li><a href="/admin"><button type="button" class="btn btn-success">
-					Administration page</button></a></li>
-				<li><a href="/edit-home"><button type="button" class="btn btn-success">
-					Edit Home page</button></a></li>
-				<li><a href="/edit-inventory"><button type="button" class="btn btn-success">
-					Edit Inventory page</button></a></li>
-				<li><a href="/edit-about"><button type="button" class="btn btn-success">
-					Edit About us page</button></a></li>
-				<li><a href="/edit-contact"><button type="button" class="btn btn-success">
-					Edit Contact page</button></a></li>
-				<li><a href="/edit-gallery"><button type="button" class="btn btn-success">
-					Edit Gallery page</button></a></li>
-				<li><a href="/upload-page"><button type="button" class="btn btn-success">
-					Upload Images</button></a></li>
-				<li><a href="/edit-paypal-button"><button type="button" class="btn btn-success">
-					Add new PalPay Button</button></a></li>
-				</ul>
-				<hr/>
-			</nav>
+	 <!-- administration menu-->
+	<div th:replace="fragments::admin-menu"></div>
 					<hr/>
 		
-
+		<h2>Create new PayPal button</h2>
         <form action="/create-paypal-button" method="POST">        
 	
 			<!-- this uses angularJS to have text box that
@@ -52,7 +30,7 @@
 			
 			<div class="form-group">
 			    <label class="col-3">Enter HTML code from PayPal website.<br/><br/>
-			    <strong>MAKE SURE TO CLOSE ALL TAGS WITH /> PAYPAL DOES NOT DO THIS FOR YOU!</strong></label>
+			    <strong>SIMPLY COPY AND PASTE CODE FROM PAYPAL WEBSITE.</strong></label>
 			    <br/><br/>
 			    <textarea class="form-control col-6" name="content" rows="4"
 			    required="required" data-error="Content is required." ></textarea>

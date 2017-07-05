@@ -47,10 +47,8 @@
 		          <li class="nav-item dropdown active">
 				    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Items for Sale</a>
 				    <div class="dropdown-menu">
-		              <a class="dropdown-item" href="/inventory-necklace">Necklaces</a>
-		              <a class="dropdown-item" href="/inventory-earring">Earrings</a>
-		              <a class="dropdown-item" href="/inventory-accessories">Accessories</a>
-		              <a class="dropdown-item" href="/inventory-other">Odds and Ends</a>
+		              <a class="dropdown-item" th:each="imgType : ${imgTypes}" 
+		              	th:href="@{'/inventory-' + ${imgType.type}}" th:text="${imgType.name}"></a>
 				    </div>
 				  </li>	    
 		          
@@ -102,7 +100,29 @@
 		      
 		    </div>
 		    
-		    
+		    <!-- administration menu -->
+		    <div th:fragment="admin-menu" th:if="${session.adminrole == true}" id="admin">
+				<hr/>
+				<ul>
+							
+				<li><a href="/admin"><button type="button" class="btn btn-success">
+					Administration page</button></a></li>
+				<li><a href="/edit-home"><button type="button" class="btn btn-success">
+					Edit Home page</button></a></li>
+				<li><a href="/edit-inventory"><button type="button" class="btn btn-success">
+					Edit Inventory page</button></a></li>
+				<li><a href="/edit-about"><button type="button" class="btn btn-success">
+					Edit About us page</button></a></li>
+				<li><a href="/edit-contact"><button type="button" class="btn btn-success">
+					Edit Contact page</button></a></li>
+				<li><a href="/edit-gallery"><button type="button" class="btn btn-success">
+					Edit Gallery page</button></a></li>
+				<li><a href="/upload-page"><button type="button" class="btn btn-success">
+					Upload Images</button></a></li>
+				<li><a href="/edit-paypal-button"><button type="button" class="btn btn-success">
+					Add new PalPay Button</button></a></li>
+				</ul>
+			</div>
 		    
 		    
 		   
@@ -170,7 +190,19 @@
 		          
 		          -->
 		          
-		          
+		                  <!--  
+        	<div class="form-group">
+			  <label class="col-3 col-form-label">Enter your old username.</label>
+			  <br/>
+			  <div class="col-6">
+			    <input class="form-control" type="text" placeholder="old username" name="oldUsername"
+			     required="required" data-error="Username is required." />
+			     <div class="help-block with-errors"></div>
+			  </div>
+			</div>
+			 -->  
+			 
+			 
 		     <!-- start of footer -->
 			 <footer th:fragment="footer">
 			     <!-- picture of my goat. -->

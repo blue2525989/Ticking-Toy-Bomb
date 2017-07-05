@@ -8,30 +8,8 @@
 		
 	<div class="container">
 	<h1>Edit Inventory Page</h1>
-	 <!-- administration menu, hard coded so wont confuse fragments.html-->
-		    <nav id="admin">
-				<hr/>
-				<ul>
-							
-				<li><a href="/admin"><button type="button" class="btn btn-success">
-					Administration page</button></a></li>
-				<li><a href="/edit-home"><button type="button" class="btn btn-success">
-					Edit Home page</button></a></li>
-				<li><a href="/edit-inventory"><button type="button" class="btn btn-success">
-					Edit Inventory page</button></a></li>
-				<li><a href="/edit-about"><button type="button" class="btn btn-success">
-					Edit About us page</button></a></li>
-				<li><a href="/edit-contact"><button type="button" class="btn btn-success">
-					Edit Contact page</button></a></li>
-				<li><a href="/edit-gallery"><button type="button" class="btn btn-success">
-					Edit Gallery page</button></a></li>
-				<li><a href="/upload-page"><button type="button" class="btn btn-success">
-					Upload Images</button></a></li>
-				<li><a href="/edit-paypal-button"><button type="button" class="btn btn-success">
-					Add new PalPay Button</button></a></li>
-				</ul>
-				<hr/>
-			</nav>
+	 <!-- administration menu-->
+	<div th:replace="fragments::admin-menu"></div>
 	
 					<hr/>
 		
@@ -39,7 +17,7 @@
 		<div class="blue-form-control">
 		
         <!-- form for top FEATURE  editing headline and content-->
-        <h1>Add a item to inventory</h1><br/>
+        <h2>Add a item to inventory</h2><br/>
 		<form action="/edit-inventory/edit-item" method="post">        
         	<div class="form-group">
 			  <label class="col-3 col-form-label">Enter a item name.</label>
@@ -58,35 +36,43 @@
 			    required="required" data-error="Content is required." ></textarea>
 			    <div class="help-block with-errors"></div>
 			  </div>
-			  			  <!-- add image from bucket-->
+	 	
+
+			  	<!-- add image from bucket-->
+			  	<div class="form-group col-4">
 			  	<label>Select an image:</label>
-		        <select name="url">
+		        <select class="form-control" name="url">
 		            <option th:each="image : ${session.imageList}"
 		                    th:text="${image.name}"
 		                    th:value="${image.url}"></option>
 		        </select>
+		        </div>
 		        <br/><br/>
-		        <label>Select a type:</label>
-		        <select name="type">
-		            <option value="necklace">Necklace</option>
-		            <option value="earring">Earrings</option>
-		            <option value="bracelet">Bracelet</option>
-		            <option value="accessory">Accessory</option>
-		            <option value="other">Other</option>
+				<!-- list image types -->
+
+			  	<div class="form-group col-4">
+			  	<label>Select a Type:</label>
+		        <select class="form-control"  name="type">
+		            <option  th:each="imgType : ${imgTypes}"
+		            th:value="${imgType.type}" th:text="${imgType.name}"></option>
 		        </select>
+		        </div>
 		        <br/>
 		        		        <br/>
-		        <label>Select a PayPal Button:</label>
-		        <select name="button">
+
+			  	<div class="form-group col-4">
+			  	<label>Select a PayPal button:</label>
+		        <select class="form-control"  name="button">
 		            <option th:each="button : ${session.buttonList}"
 		                    th:text="${button.name}"
 		                    th:value="${button.url}"></option>
 		        </select>
+		        </div>
 		        <br/>
 		        
 		     <div class="form-group">
-			  <label class="col-3 col-form-label">Enter a Price.</label>
-			  <br/>
+			  <label class="col-3 col-form-label">Enter a Price: </label>
+			  
 			  <div class="col-6">
 			    <input class="form-control" type="text" placeholder="75.50 (number &amp; decimal only)" name="price"
 			     required="required" data-error="Price is required." />

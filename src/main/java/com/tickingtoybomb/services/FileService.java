@@ -26,23 +26,28 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.util.IOUtils;
 import com.tickingtoybomb.controller.PermissionController;
 import com.tickingtoybomb.model.Image;
+import com.tickingtoybomb.model.ImageTypes;
 import com.tickingtoybomb.repository.ImageRepository;
+import com.tickingtoybomb.repository.ImageTypeRepository;
 
 @Controller
 public class FileService extends PermissionController {
 	
 	private ImageRepository imgRepo;
 	private AmazonS3Client s3client;
+	private ImageTypeRepository imgTypeRepo;
 	
 	@Autowired
-	public FileService(ImageRepository imgRepo,	AmazonS3Client s3client) {
+	public FileService(ImageRepository imgRepo,	AmazonS3Client s3client,
+			ImageTypeRepository imgTypeRepo) {
 		this.imgRepo = imgRepo;
 		this.s3client = s3client;
+		this.imgTypeRepo = imgTypeRepo;
 	}
 
 	// uses javaScript to upload, mainly just redirects to saved
 	@RequestMapping("/upload-image")
-	public String upload2(@RequestParam MultipartFile file, HttpSession session,
+	public String upload(@RequestParam MultipartFile file, HttpSession session,
 			MultipartRequest event, Model model, @RequestParam String type) {
 		/*
 		 * Obtain the Content length of the Input stream for S3 header
@@ -77,7 +82,7 @@ public class FileService extends PermissionController {
 		 */
 		try {
 
-		    s3client.putObject(new PutObjectRequest("",
+		    s3client.putObject(new PutObjectRequest("" + type,
 		    		file.getOriginalFilename(), inputStream, metadata).withCannedAcl(CannedAccessControlList.PublicReadWrite));
 
 		} catch (AmazonServiceException ase) {
@@ -100,7 +105,7 @@ public class FileService extends PermissionController {
 		
 		Image img = new Image();
 		img.setName(file.getOriginalFilename());
-		img.setUrl("" + file.getOriginalFilename());
+		img.setUrl("" + type + "/" + file.getOriginalFilename());
 		img.setType(type);
 		imgRepo.save(img);
 		
@@ -112,15 +117,19 @@ public class FileService extends PermissionController {
 		else if (hasUserRole()) {
 			session.setAttribute("userrole", hasUserRole());
 		}
-
+		addTypesForMenu(model);
 		String saved = "Image " + file.getOriginalFilename() + " has been saved.";
 		model.addAttribute("saved", saved);
-		return "redirect:/saved";
+		return "admin/saved";
 	}
 	
 	@RequestMapping("/upload-page")
-	public String uploadImagePage(HttpSession session) {
-		
+	public String uploadImagePage(HttpSession session, Model model) {
+		addTypesForMenu(model);
+		List<ImageTypes> fullList = imgTypeRepo.findAll();
+		if (fullList != null) {
+			model.addAttribute("fullList", fullList);
+		}
 		// admin user
 		if (hasAdminRole()) {
 			session.setAttribute("adminrole", hasAdminRole());
@@ -132,21 +141,48 @@ public class FileService extends PermissionController {
 		return "admin/upload-images";
 	}
 	
-	// delete element
+	@RequestMapping("/new-image-type")
+	public String addNewImgType(@RequestParam String name, @RequestParam String type, Model model) {
+		addTypesForMenu(model);
+		ImageTypes img = new ImageTypes();
+		img.setName(name);
+		img.setType(type);
+		imgTypeRepo.save(img);
+		String saved = "The image type " + name + " has been saved.";
+		model.addAttribute("saved", saved);
+		return "admin/saved";
+	}
+	
+	// delete image
 	@GetMapping(path="/delete-image")
 	public String deleteImages(Long ID, Model model) {
+		addTypesForMenu(model);
 		// need to add aws code to delete from bucket
 		String file = imgRepo.findOne(ID).getName();
+		String type = imgRepo.findOne(ID).getType();
 		imgRepo.delete(ID);
-		s3client.deleteObject(new DeleteObjectRequest("", file));
+		s3client.deleteObject(new DeleteObjectRequest("" + type, file));
 		String saved = "The Image with Name " + file + " has been deleted.";
 		model.addAttribute("saved", saved);
 		return "admin/saved";
 	}
+	
+	// delete image type
+	@GetMapping(path="/delete-image-type")
+	public String deleteImageType(Long ID, Model model) {
+		addTypesForMenu(model);
+		// need to add aws code to delete from bucket
+		String file = imgTypeRepo.findOne(ID).getName();
+		imgRepo.delete(ID);
+		String saved = "The Image Type with Name " + file + " has been deleted.";
+		model.addAttribute("saved", saved);
+		return "admin/saved";
+	}
 		
-	// list all element
+	// list all images
 	@RequestMapping("/list-images")
 	public String listImages(Model model, @RequestParam String type) {
+		addTypesForMenu(model);
 		List<Image> imageList = imgRepo.findAll();
 		List<Image> realList = new ArrayList<Image>();
 		for (int i = imageList.size()-1; i >= 0; i--) {
@@ -158,6 +194,17 @@ public class FileService extends PermissionController {
 			model.addAttribute("listMain", realList);
 		}	
 		return "admin/list-all-images";
+	}
+	
+	// list all image types
+	@RequestMapping("/list-images-type")
+	public String listImageType(Model model) {
+		addTypesForMenu(model);
+		List<ImageTypes> imageList = imgTypeRepo.findAll();
+		if (imageList != null) {
+			model.addAttribute("listMain", imageList);
+		}	
+		return "admin/list-all-image-types";
 	}
 }
 

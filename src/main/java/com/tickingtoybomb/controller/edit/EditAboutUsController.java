@@ -32,7 +32,8 @@ public class EditAboutUsController extends PermissionController {
 	}
 
 	@RequestMapping("/edit-about")
-	public String admin(HttpSession session) {
+	public String admin(HttpSession session, Model model) {
+		addTypesForMenu(model);
 		
 		// adds full list from gallery
 		// need to work on slimming down list.
@@ -69,6 +70,7 @@ public class EditAboutUsController extends PermissionController {
 	// delete element
 	@GetMapping(path="/delete-about-content")
 	public String deleteFeature(Long ID, Model model) {
+		addTypesForMenu(model);
 		about.delete(ID);
 		String saved = "The About Content with ID " + ID + " has been deleted.";
 		model.addAttribute("saved", saved);
@@ -78,6 +80,7 @@ public class EditAboutUsController extends PermissionController {
 	// list all element
 	@RequestMapping("/list-about-content")
 	public String listAllFeatures(Model model) {
+		addTypesForMenu(model);
 		List<AboutContent> aboutList = about.findAll();
 		if (aboutList != null) {
 			model.addAttribute("listMain", aboutList);

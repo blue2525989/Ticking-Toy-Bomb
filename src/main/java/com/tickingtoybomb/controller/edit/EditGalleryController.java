@@ -31,7 +31,8 @@ public class EditGalleryController extends PermissionController {
 	}
 	
 	@RequestMapping("/edit-gallery")
-	public String admin(HttpSession session) {
+	public String admin(HttpSession session, Model model) {
+		addTypesForMenu(model);
 		
 		// adds full list from gallery
 		// need to work on slimming down list.
@@ -53,13 +54,11 @@ public class EditGalleryController extends PermissionController {
 	@PostMapping(path="/edit-gallery/edit-card")
 	// request params to save
 	public String addNewCardGallery(Model model, @RequestParam String headline
-			, @RequestParam String content, @RequestParam String url,
-			@RequestParam String type) {
+			, @RequestParam String content, @RequestParam String url) {
 
 		GalleryCardContent cardNew = new GalleryCardContent();
 		cardNew.setHeadline(headline);
 		cardNew.setContent(content);
-		cardNew.setType(type);
 		cardNew.setUrl(url);
 		card.save(cardNew);
 		return "redirect:/edit-gallery";
@@ -69,6 +68,7 @@ public class EditGalleryController extends PermissionController {
 	// delete element
 	@GetMapping(path="/delete-card-gallery")
 	public String deleteCard(Long ID, Model model) {
+		addTypesForMenu(model);
 		card.delete(ID);
 		String saved = "The card with ID " + ID + " has been deleted.";
 		model.addAttribute("saved", saved);
@@ -78,6 +78,7 @@ public class EditGalleryController extends PermissionController {
 	// list all element
 	@RequestMapping("/list-card-gallery")
 	public String listAllcards(Model model) {
+		addTypesForMenu(model);
 		List<GalleryCardContent> cardList = card.findAll();
 		if (cardList != null) {
 			model.addAttribute("listMain", cardList);

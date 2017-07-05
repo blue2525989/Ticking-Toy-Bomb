@@ -22,8 +22,6 @@ public class GalleryCardContent {
 	
 	// @NotNull /*uncomment out once can pass variable from js to here */
 	private String date; /* get the javaScript variable for this */
-
-	private String type;
 	
 	private String url;
 	
@@ -57,14 +55,6 @@ public class GalleryCardContent {
 
 	public void setDate(String date) {
 		this.date = date;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getUrl() {

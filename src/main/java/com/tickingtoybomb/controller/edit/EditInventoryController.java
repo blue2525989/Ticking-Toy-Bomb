@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tickingtoybomb.controller.PermissionController;
 import com.tickingtoybomb.model.Image;
+import com.tickingtoybomb.model.ImageTypes;
 import com.tickingtoybomb.model.InventoryItem;
 import com.tickingtoybomb.model.PayPalButton;
 import com.tickingtoybomb.repository.ImageRepository;
+import com.tickingtoybomb.repository.ImageTypeRepository;
 import com.tickingtoybomb.repository.InventoryRepository;
 import com.tickingtoybomb.repository.PayPalButtonRepository;
 
@@ -28,19 +30,21 @@ public class EditInventoryController extends PermissionController {
 	private InventoryRepository inventory;
 	private ImageRepository imgRepo;
 	private PayPalButtonRepository buttons;
+	private ImageTypeRepository imgTypeRepo;
 	
 	// autowire the repository to the controller
 	@Autowired
 	public EditInventoryController(InventoryRepository inventory, ImageRepository imgRepo,
-			PayPalButtonRepository buttons) {
+			PayPalButtonRepository buttons, ImageTypeRepository imgTypeRepo) {
 		this.inventory = inventory;
 		this.imgRepo = imgRepo;
 		this.buttons = buttons;
+		this.imgTypeRepo = imgTypeRepo;
 	}
 	
 	@RequestMapping("/edit-inventory")
-	public String adminInventory(HttpSession session) {
-		
+	public String adminInventory(HttpSession session, Model model) {
+		addTypesForMenu(model);		
 		// adds full list from gallery
 		// need to work on slimming down list.
 		List<Image> imageList = imgRepo.findAll();
@@ -50,6 +54,10 @@ public class EditInventoryController extends PermissionController {
 		List<PayPalButton> buttonList = buttons.findAll();
 		if (buttonList != null) {
 			session.setAttribute("buttonList", buttonList);
+		}
+		List<ImageTypes> fullList = imgTypeRepo.findAll();
+		if (fullList != null) {
+			model.addAttribute("fullList", fullList);
 		}
 		// admin user
 		if (hasAdminRole()) {
@@ -83,9 +91,9 @@ public class EditInventoryController extends PermissionController {
 	// delete element
 	@GetMapping(path="/delete-item")
 	public String deleteItem(Long ID, Model model) {
+		addTypesForMenu(model);
 		String name = inventory.getOne(ID).getHeadline();
 		inventory.delete(ID);
-		// add javaScript document pop notifcation
 		String saved = "The Item " + name + " has been deleted.";
 		model.addAttribute("saved", saved);
 		return "admin/saved";
@@ -94,6 +102,7 @@ public class EditInventoryController extends PermissionController {
 	// list all element
 	@RequestMapping("/list-items")
 	public String listAllitems(Model model, HttpSession session) {
+		addTypesForMenu(model);
 		List<InventoryItem> items = inventory.findAll();
 		// Iterator iter = jumboList.iterator();
 		if (items != null) {

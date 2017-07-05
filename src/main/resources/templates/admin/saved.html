@@ -7,30 +7,9 @@
 	<nav th:replace="fragments::nav"></nav>
 		
 	<div class="container">
-	 <!-- administration menu, hard coded so wont confuse fragments.html-->
-		    <nav id="admin" th:if="${session.adminrole == true}">
-				<hr/>
-				<ul>
-							
-				<li><a href="/admin"><button type="button" class="btn btn-success">
-					Administration page</button></a></li>
-				<li><a href="/edit-home"><button type="button" class="btn btn-success">
-					Edit Home page</button></a></li>
-				<li><a href="/edit-inventory"><button type="button" class="btn btn-success">
-					Edit Inventory page</button></a></li>
-				<li><a href="/edit-about"><button type="button" class="btn btn-success">
-					Edit About us page</button></a></li>
-				<li><a href="/edit-contact"><button type="button" class="btn btn-success">
-					Edit Contact page</button></a></li>
-				<li><a href="/edit-gallery"><button type="button" class="btn btn-success">
-					Edit Gallery page</button></a></li>
-				<li><a href="/upload-page"><button type="button" class="btn btn-success">
-					Upload Images</button></a></li>
-				<li><a href="/edit-paypal-button"><button type="button" class="btn btn-success">
-					Add new PalPay Button</button></a></li>
-				</ul>
-				<hr/>
-			</nav>
+	 <!-- administration menu-->
+	<div th:replace="fragments::admin-menu"></div>
+	<hr/>
 	
 			
 			<!-- this is where saved session shows up -->

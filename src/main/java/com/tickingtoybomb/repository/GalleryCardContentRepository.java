@@ -11,5 +11,4 @@ public interface GalleryCardContentRepository extends JpaRepository<GalleryCardC
 	
 	List<GalleryCardContent> findById(Long count);
 
-	List<GalleryCardContent> findByType(String type);
 }
