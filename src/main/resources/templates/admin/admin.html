@@ -16,11 +16,15 @@
 
 		<h2>Change username and password.</h2>
         <form action="/change-account-details" method="POST"> 
- 
+        	    <small id="fileHelp" class="form-text text-muted">
+				This will change your personal login information. Your new username and password will 
+				take affect once logged out and back in.
+				</small>
+ 				<br/>
 			<input type="hidden" name="oldUsername" th:value="${#httpServletRequest.remoteUser}" /> 
 			   
        		<div class="form-group">
-			  <label class="col-3 col-form-label">Enter a new username.</label>
+			  <label>Enter a new username.</label>
 			  <br/>
 			  <div class="col-6">
 			    <input class="form-control" type="text" placeholder="username" name="username"
@@ -30,7 +34,7 @@
 			</div>
             
            <div class="form-group">
-			  <label class="col-3 col-form-label">Enter a new password.</label>
+			  <label>Enter a new password.</label>
 			  <br/>
 			  <div class="col-6">
 			    <input class="form-control" type="text" placeholder="password" name="password"
@@ -45,12 +49,15 @@
         
         <h2>Change password.</h2>
         <form action="/change-password" method="POST"> 
-  
+        		<small id="fileHelp" class="form-text text-muted">
+				This will change the password for the current account. The changes will take affect once logged out and back in.
+				</small>
+  				<br/>
 			<input type="hidden" name="oldUsername" th:value="${#httpServletRequest.remoteUser}" /> 
 			    
                
            <div class="form-group">
-			  <label class="col-3 col-form-label">Enter a new password.</label>
+			  <label>Enter a new password.</label>
 			  <br/>
 			  <div class="col-6">
 			    <input class="form-control" type="text" placeholder="password" name="password"
@@ -61,7 +68,8 @@
 			
             <button type="submit" class="btn btn-success">Change password</button>
         </form>
-    
+        
+    <br/><br/><br/>
     
 	<!-- end container -->
 	</div>

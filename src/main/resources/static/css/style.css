@@ -13,12 +13,10 @@ div.jumbotron {
 }
 
 img {
+    border-radius: 7px;
     max-width: 100%;
     height: auto;
     width: auto\9; /* ie8 */
-}
-div.blue-form-control {
-  max-width: 75%;
 }
 footer {
 	border-radius: 3px;

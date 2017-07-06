@@ -88,7 +88,7 @@
 		    
 		    <!-- jumbotron-->
 		    <div th:fragment="jumbotron" class="jumbotron" th:style="'background:url(' + ${session.jumboMain.url} + ');
-		      max-width: auto; height: auto;  background-position: 0% 25%; background-size: cover; background-repeat: no-repeat;'">
+		      max-width: auto; height: auto;  background-position: 0% 25%; background-size: 100% 100%; background-repeat: no-repeat;'">
 		      <div class="container" th:unless="${session.jumboMain == null}">
 		        <h1 class="display-3" th:utext="${session.jumboMain.headline}">headline</h1>
 		        <p th:utext="${session.jumboMain.content}">content</p>

@@ -15,29 +15,33 @@
 
 		<!-- form for editing headline and content-->
 		<h2>Edit the content on About us page</h2>
-		<form action="/edit-about/edit-about-content" method="post">        
+		<form class="form-group" action="/edit-about/edit-about-content" method="post">        
        		<div class="form-group">
-			  <label class="col-3 col-form-label">Enter a Headline.</label>
+			  <label>Enter a Headline.</label>
 			  <br/>
-			  <div class="col-6">
-			    <input class="form-control" type="text" placeholder="Catchy Headline" name="headline"
+			  <div>
+			    <input class="form-control col-8" type="text" placeholder="Catchy Headline" name="headline"
 			     required="required" data-error="Headline is required." />
 			     <div class="help-block with-errors"></div>
 			  </div>
 			</div>
 			
 			<div class="form-group">
-			    <label class="col-3">Enter a paragraph to get the client attention.</label>
+			    <label>Enter a main content.</label>
 			    <br/>
-			    <textarea class="form-control col-6" name="content" rows="4"
+			    <small id="fileHelp" class="form-text text-muted">
+				Enter some interesting content about your company to get people talking about your business.
+				</small>
+				<br/>
+			    <textarea class="form-control col-10" name="content" rows="6"
 			    required="required" data-error="Content is required." ></textarea>
 			    <div class="help-block with-errors"></div>
 			  </div>
 
 			  	<!-- add image from bucket-->
-			  	<div class="form-group col-4">
+			  	<div class="form-group">
 			  	<label>Select an image:</label>
-		        <select class="form-control"  name="url">
+		        <select class="form-control col-6"  name="url">
 		            <option th:each="image : ${session.imageList}"
 		                    th:text="${image.name}"
 		                    th:value="${image.url}"></option>
@@ -53,7 +57,7 @@
         	<h2>Delete entry based on ID number</h2>
 			<form action="/delete-about-content" method="GET">
 				<label for="ID">ID:</label><br />
-				<input type="text" name="ID" size="50" class="ID"  
+				<input type="text" name="ID" class="ID"  
 				required="required" data-error="ID is required." />
 				<div class="help-block with-errors"></div><br />	
 				<h3>Click this button to delete entry</h3><br />

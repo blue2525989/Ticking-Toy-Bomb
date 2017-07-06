@@ -19,20 +19,29 @@
 			user can type and update in real time -->
 				
         	<div class="form-group">
-			  <label class="col-3 col-form-label">Enter a descriptive button name.</label>
+			  <label>Enter a descriptive button name.</label>
 			  <br/>
-			  <div class="col-6">
-			    <input class="form-control" type="text" placeholder="Button name" name="name"
+			  <div>
+			    <input class="form-control col-8" type="text" placeholder="Button name" name="name"
 			     required="required" data-error="Name is required." />
 			     <div class="help-block with-errors"></div>
 			  </div>
 			</div>
 			
 			<div class="form-group">
-			    <label class="col-3">Enter HTML code from PayPal website.<br/><br/>
-			    <strong>SIMPLY COPY AND PASTE CODE FROM PAYPAL WEBSITE.</strong></label>
+			    <label>Enter HTML code from PayPal website.<br/><br/>
+			    <strong>COPY AND PASTE CODE FROM PAYPAL WEBSITE.</strong></label>
+			    <small id="fileHelp" class="form-text text-muted col-10">
+			    Login to your PayPal account, from the top menu select the Tools drop-down menu and then click 
+			    Business Setup. This will redirect you to a page asking how you want to setup PayPal on your website, 
+			    choose "Option B: Add HTML buttons to your website yourself" and then click Create payment buttons.<br/><br/>
+			    From this point you have the option of making custom buttons for your items. Read through the options and 
+			    select what you need and then click Create Button at the bottom of the page. Simply copy and paste the generated 
+			    HTML code into the text area and your finished!
+			    </small>
+			    
 			    <br/><br/>
-			    <textarea class="form-control col-6" name="content" rows="4"
+			    <textarea class="form-control col-10" name="content" rows="6"
 			    required="required" data-error="Content is required." ></textarea>
 			    <div class="help-block with-errors"></div>
 			  </div>
@@ -45,7 +54,7 @@
         	<h2>Delete entry based on ID number</h2>
 			<form action="/delete-paypal-button" method="GET">
 				<label for="ID">ID:</label><br />
-				<input type="text" name="ID" size="50" class="ID"  
+				<input type="text" name="ID" class="ID"  
 				required="required" data-error="ID is required." />
 				<div class="help-block with-errors"></div><br />	
 				<h3>Click this button to delete entry</h3><br />

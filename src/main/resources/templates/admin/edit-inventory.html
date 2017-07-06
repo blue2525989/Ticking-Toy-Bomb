@@ -13,46 +13,51 @@
 	
 					<hr/>
 		
-		<!-- centering up forms -->
-		<div class="blue-form-control">
 		
         <!-- form for top FEATURE  editing headline and content-->
         <h2>Add a item to inventory</h2><br/>
-		<form action="/edit-inventory/edit-item" method="post">        
+		<form class="form-group" action="/edit-inventory/edit-item" method="post">  
+		
+		<small id="fileHelp" class="form-text text-muted col-10">
+		Add items to your inventory. Choose a catchy name with buzz words. Next enter a detailed 
+		description about the item. Then choose the corresponding image, category type and PayPal button 
+		to go with your item. Click Add Item and your finsihed!		
+		</small>
+		<br/>         
         	<div class="form-group">
-			  <label class="col-3 col-form-label">Enter a item name.</label>
+			  <label>Enter a item name.</label>
 			  <br/>
-			  <div class="col-6">
-			    <input class="form-control" type="text" placeholder="Catchy Headline" name="headline"
+			  <div>
+			    <input class="form-control col-8" type="text" placeholder="Catchy Headline" name="headline"
 			     required="required" data-error="Headline is required." />
 			     <div class="help-block with-errors"></div>
 			  </div>
 			</div>
 			
 			<div class="form-group">
-			    <label class="col-3">Enter a item description.</label>
+			    <label>Enter a item description.</label>
 			    <br/>
-			    <textarea class="form-control col-6" name="content" rows="4"
+			    <textarea class="form-control col-10" name="content" rows="6"
 			    required="required" data-error="Content is required." ></textarea>
 			    <div class="help-block with-errors"></div>
 			  </div>
 	 	
 
 			  	<!-- add image from bucket-->
-			  	<div class="form-group col-4">
+			  	<div class="form-group">
 			  	<label>Select an image:</label>
-		        <select class="form-control" name="url">
+		        <select class="form-control col-6"  name="url">
 		            <option th:each="image : ${session.imageList}"
 		                    th:text="${image.name}"
 		                    th:value="${image.url}"></option>
 		        </select>
-		        </div>
-		        <br/><br/>
+			  </div>
+			  <br/><br/>
 				<!-- list image types -->
 
-			  	<div class="form-group col-4">
+			  	<div class="form-group">
 			  	<label>Select a Type:</label>
-		        <select class="form-control"  name="type">
+		        <select class="form-control col-6"  name="type">
 		            <option  th:each="imgType : ${imgTypes}"
 		            th:value="${imgType.type}" th:text="${imgType.name}"></option>
 		        </select>
@@ -60,9 +65,9 @@
 		        <br/>
 		        		        <br/>
 
-			  	<div class="form-group col-4">
+			  	<div class="form-group">
 			  	<label>Select a PayPal button:</label>
-		        <select class="form-control"  name="button">
+		        <select class="form-control col-6"  name="button">
 		            <option th:each="button : ${session.buttonList}"
 		                    th:text="${button.name}"
 		                    th:value="${button.url}"></option>
@@ -71,10 +76,10 @@
 		        <br/>
 		        
 		     <div class="form-group">
-			  <label class="col-3 col-form-label">Enter a Price: </label>
+			  <label>Enter a Price: </label>
 			  
-			  <div class="col-6">
-			    <input class="form-control" type="text" placeholder="75.50 (number &amp; decimal only)" name="price"
+			  <div>
+			    <input class="form-control col-4" type="text" placeholder="75.50" name="price"
 			     required="required" data-error="Price is required." />
 			     <div class="help-block with-errors"></div>
 			  </div>
@@ -91,7 +96,7 @@
         	<h2>Delete entry based on ID number</h2>
 			<form action="/delete-item" method="GET">
 				<label for="ID">ID:</label><br />
-				<input type="text" name="ID" size="50" class="ID"  
+				<input type="text" name="ID" class="ID"  
 				required="required" data-error="ID is required." />
 				<div class="help-block with-errors"></div><br />	
 				<h3>Click this button to delete entry</h3><br />
@@ -110,14 +115,6 @@
 				
 		<br/><br/><hr/>
 
-	
-	
-
-	<!-- end form control -->
-	</div>
-	
-	
-	
 	<!-- end container -->
 	</div>
        <!-- start of footer -->

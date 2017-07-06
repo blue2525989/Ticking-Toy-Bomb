@@ -19,22 +19,30 @@
 		
 		<!-- form for editing JUMBOTRON headline and content-->
 		<h2>Edit JumboTron</h2><br/>
-		<form action="/edit-home/edit-jumbo" method="post">        
+		<form class="form-group" action="/edit-home/edit-jumbo" method="post">   
+				<small id="fileHelp" class="form-text text-muted col-10">
+				You have the option of entering text to impose over your banner. The headline will be 
+				large, bold and shadowed. The content will be normal sized font. Both text is shown in 
+				white.<br/><br/>
+				Also if no content is needed, add a blank space in each text area. If more space is needed 
+				to accomidate the banner image, use the HTML tag &lt;br &#x2F;&gt; NOTE: the &#x2F; is important 
+				to close the tag.
+				</small>
+				<br/>     
        		<div class="form-group">
-			  <label class="col-3 col-form-label">Enter a Headline for the JumboTron.</label>
+			  <label>Enter a Headline for the JumboTron.</label>
 			  <br/>
-			  <div class="col-6">
-			    <input class="form-control" type="text" placeholder="Catchy Headline" name="headline"
+			  <div>
+			    <input class="form-control col-8" type="text" placeholder="Catchy Headline" name="headline"
 			     required="required" data-error="Headline is required."  />
 			    <div class="help-block with-errors"></div>
 			  </div>
 			</div>
 			
 			<div class="form-group">
-			    <span class="col-3">Enter a brief paragraph to impose on the JumboTron. This section 
-			    contains a button the takes users to your services page, so maybe a lead into that.</span>
+			    <span>Enter content to impose on Jumbotron.</span>
 			    <br/>
-			    <textarea class="form-control col-6" name="content" rows="4"
+			    <textarea class="form-control col-10" name="content" rows="6"
 			     required="required" data-error="Content is required." ></textarea>
 			    <div class="help-block with-errors"></div>
 			  </div>
@@ -42,15 +50,16 @@
 			  	
 
 			  	<!-- add image from bucket-->
-			  	<div class="form-group col-4">
+			  	<div class="form-group">
 			  	<label>Select an image:</label>
-		        <select class="form-control"  name="url">
+		        <select class="form-control col-6"  name="url">
 		            <option th:each="image : ${session.imageList}"
 		                    th:text="${image.name}"
 		                    th:value="${image.url}"></option>
 		        </select>
-		        </div>
-		        <br/>
+			  </div>
+			  <br/><br/>
+			  
              <button type="submit" class="btn btn-success">Edit JumboTron</button> 
         </form> 
         
@@ -59,7 +68,7 @@
         	<h2>Delete entry based on ID number</h2>
 			<form action="/delete-jumbo" method="GET">
 				<label for="ID">ID:</label><br />
-				<input type="text" name="ID" size="50" class="ID"  
+				<input type="text" name="ID" class="ID"  
 				required="required" data-error="ID is required." />
 				<div class="help-block with-errors"></div><br />	
 				<h3>Click this button to delete entry</h3><br />
@@ -77,23 +86,31 @@
 				
 				
 		<br/><br/><hr/>
+		<br/><br/>
+		<h1>Edit Contact, About us and Gallery cards.</h1>
+		<br/>
+		<small id="fileHelp" class="form-text text-muted">
+		This section lets you edit the content cards on the main page directing visitors 
+		to your Contact, About us and Gallery pages. 	
+		</small>
+		<br/>  
         <!-- form for  GALLERY CARD editing headline and content-->
         <h2>Edit Gallery Card</h2><br/>
-		<form action="/edit-home/edit-card1" method="post">        
-       		<div class="form-group">
-			  <label class="col-3 col-form-label">Enter a Headline for Gallery Card.</label>
+		<form class="form-group" action="/edit-home/edit-card1" method="post">        
+       		<div>
+			  <label>Enter a Headline for Gallery Card.</label>
 			  <br/>
-			  <div class="col-6">
-			    <input class="form-control" type="text" placeholder="Catchy Headline" name="headline"
+			  <div>
+			    <input class="form-control col-8" type="text" placeholder="Catchy Headline" name="headline"
 			     required="required" data-error="Headline is required."  />
 			    <div class="help-block with-errors"></div>
 			  </div>
 			</div>
 			
 			<div class="form-group">
-			    <span class="col-3">Enter a brief paragraph to direct people to your gallery.</span>
+			    <span>Enter main content.</span>
 			    <br/>
-			    <textarea class="form-control col-6" name="content" rows="4"
+			    <textarea class="form-control col-10" name="content" rows="6"
 			     required="required" data-error="Content is required." ></textarea>
 			    <div class="help-block with-errors"></div>
 			  </div>
@@ -106,21 +123,21 @@
 		<br/><br/><hr/>
         <!-- form for  ABOUT US CARD editing headline and content-->
         <h2>Edit About us Card</h2><br/>
-		<form action="/edit-home/edit-card1" method="post">        
-       		<div class="form-group">
-			  <label class="col-3 col-form-label">Enter a Headline for About Us Card.</label>
+		<form class="form-group" action="/edit-home/edit-card1" method="post">        
+       		<div>
+			  <label>Enter a Headline for About Us Card.</label>
 			  <br/>
-			  <div class="col-6">
-			    <input class="form-control" type="text" placeholder="Catchy Headline" name="headline"
+			  <div>
+			    <input class="form-control col-8" type="text" placeholder="Catchy Headline" name="headline"
 			     required="required" data-error="Headline is required."  />
 			    <div class="help-block with-errors"></div>
 			  </div>
 			</div>
 			
 			<div class="form-group">
-			    <span class="col-3">Enter a brief paragraph to direct people to about us page.</span>
+			    <span>Enter main content.</span>
 			    <br/>
-			    <textarea class="form-control col-6" name="content" rows="4"
+			    <textarea class="form-control col-10" name="content" rows="6"
 			     required="required" data-error="Content is required." ></textarea>
 			    <div class="help-block with-errors"></div>
 			  </div>
@@ -134,21 +151,21 @@
 		
         <!-- form for  CONTACT CARD editing headline and content-->
         <h2>Edit Contact Us Card</h2><br/>
-		<form action="/edit-home/edit-card1" method="post">        
-       		<div class="form-group">
-			  <label class="col-3 col-form-label">Enter a Headline for Contact Card.</label>
+		<form class="form-group" action="/edit-home/edit-card1" method="post">       
+       		<div>
+			  <label>Enter a Headline for Contact Card.</label>
 			  <br/>
-			  <div class="col-6">
-			    <input class="form-control" type="text" placeholder="Catchy Headline" name="headline"
+			  <div>
+			    <input class="form-control col-8" type="text" placeholder="Catchy Headline" name="headline"
 			     required="required" data-error="Headline is required."  />
 			    <div class="help-block with-errors"></div>
 			  </div>
 			</div>
 			
 			<div class="form-group">
-			    <span class="col-3">Enter a brief paragraph to let know people where to contact you.</span>
+			    <span>Enter main content.</span>
 			    <br/>
-			    <textarea class="form-control col-6" name="content" rows="4"
+			    <textarea class="form-control col-10" name="content" rows="6"
 			     required="required" data-error="Content is required." ></textarea>
 			    <div class="help-block with-errors"></div>
 			  </div>
@@ -162,7 +179,7 @@
         	<h2>Delete entry based on ID number</h2>
 			<form action="/delete-card" method="GET">
 				<label for="ID">ID:</label><br />
-				<input type="text" name="ID" size="50" class="ID"  
+				<input type="text" name="ID" class="ID"  
 				required="required" data-error="ID is required." />
 				<div class="help-block with-errors"></div><br />	
 				<h3>Click this button to delete entry</h3><br />
@@ -183,21 +200,27 @@
 		
         <!-- form for BOTTOM FEATURE  editing headline and content-->
         <h1>Edit Bottom Feature</h1><br/>
-		<form action="/edit-home/edit-feature" method="post">        
-       		<div class="form-group">
-			  <label class="col-3 col-form-label">Enter a Headline.</label>
+		<form class="form-group" action="/edit-home/edit-feature" method="post">  
+		
+		<small id="fileHelp" class="form-text text-muted col-10">
+		This section lets you highlight your main service on your main page. Add a picture with 
+		a flashy headline to catch peoples attention and then describe what you have to offer.		
+		</small>
+		<br/>         
+       		<div>
+			  <label>Enter a Headline.</label>
 			  <br/>
-			  <div class="col-6">
-			    <input class="form-control" type="text" placeholder="Catchy Headline" name="headline"
+			  <div>
+			    <input class="form-control col-8" type="text" placeholder="Catchy Headline" name="headline"
 			     required="required" data-error="Headline is required." />
 			     <div class="help-block with-errors"></div>
 			  </div>
 			</div>
 			
 			<div class="form-group">
-			    <label class="col-3">Enter a paragraph to get the client attention.</label>
+			    <label>Enter main content.</label>
 			    <br/>
-			    <textarea class="form-control col-6" name="content" rows="4"
+			    <textarea class="form-control col-10" name="content" rows="6"
 			    required="required" data-error="Content is required." ></textarea>
 			    <div class="help-block with-errors"></div>
 			  </div>
@@ -205,15 +228,16 @@
 			  	
 
 			  	<!-- add image from bucket-->
-			  	<div class="form-group col-4">
+			  	<div class="form-group">
 			  	<label>Select an image:</label>
-		        <select class="form-control"  name="url">
+		        <select class="form-control col-6"  name="url">
 		            <option th:each="image : ${session.imageList}"
 		                    th:text="${image.name}"
 		                    th:value="${image.url}"></option>
 		        </select>
-		        </div>
-		        <br/>
+			  </div>
+			  <br/><br/>
+			  
              <button type="submit" class="btn btn-success">Edit Bottom Feature</button> 
         </form> 
         
@@ -222,7 +246,7 @@
         	<h2>Delete entry based on ID number</h2>
 			<form action="/delete-feature" method="GET">
 				<label for="ID">ID:</label><br />
-				<input type="text" name="ID" size="50" class="ID"  
+				<input type="text" name="ID" class="ID"  
 				required="required" data-error="ID is required." />
 				<div class="help-block with-errors"></div><br />	
 				

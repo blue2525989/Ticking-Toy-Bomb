@@ -15,7 +15,7 @@ import com.tickingtoybomb.controller.PermissionController;
 @Controller
 public class EditAdminController extends PermissionController {
 	
-	private final String URL = "jdbc:mysql://";
+	private final String URL = "";
 	
 	@RequestMapping("/change-account-details")
 	public String addNewUser (@RequestParam String username
